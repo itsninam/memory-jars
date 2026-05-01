@@ -16,13 +16,18 @@ function Theme({ theme }) {
 function Sharing({ user }) {
   if (user.length === 0) return <p>private</p>;
 
-  return (
-    <>
-      {user.map((name) => {
-        return <p key={name}>shared with {name}</p>;
-      })}
-    </>
-  );
+  const firstThreeUsers = user.slice(0, 3);
+
+  const remainingUsers = user.length - 3;
+
+  if (remainingUsers > 0)
+    return (
+      <p>
+        shared with {firstThreeUsers.join(", ")} and {remainingUsers} others
+      </p>
+    );
+
+  return <p>shared with {user.join(", ")}</p>;
 }
 
 function Expiry({ date }) {

@@ -2,8 +2,8 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
-import SealedJars from "./pages/jars/SealedJars";
 import ProtectedRoute from "./pages/ProtectedRoute";
+import SealedJars from "./pages/jars/sealedJars/SealedJars";
 
 function App() {
   return (
