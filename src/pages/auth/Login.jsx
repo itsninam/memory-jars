@@ -1,11 +1,11 @@
 import React from "react";
 import AppForm from "../../components/AppForm";
 import Button from "../../components/Button";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from "./hooks/useLogin";
 
 function Login() {
-  const { login, isPending, error } = useLogin();
+  const { login, isPending } = useLogin();
   const navigate = useNavigate();
 
   const onSubmit = (data, { reset }) => {

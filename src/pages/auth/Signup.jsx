@@ -1,9 +1,8 @@
-import React, { useContext } from "react";
-import AppForm, { useAppFormContext } from "../../components/AppForm";
+import React from "react";
+import AppForm from "../../components/AppForm";
 import Button from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignUp } from "./hooks/useSignUp";
-import { useQueryClient } from "@tanstack/react-query";
 
 function Signup() {
   const { signUp, isPending } = useSignUp();
