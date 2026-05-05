@@ -1,8 +1,13 @@
 import React from "react";
 import { formatDate } from "../../../utils/formatDate";
+import { Link } from "react-router-dom";
 
-function Jar({ children }) {
-  return <li>{children}</li>;
+function Jar({ children, id }) {
+  return (
+    <li>
+      <Link to={`${id}`}>{children}</Link>
+    </li>
+  );
 }
 
 function Title({ title }) {

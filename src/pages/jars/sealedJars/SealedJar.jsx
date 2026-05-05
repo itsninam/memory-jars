@@ -3,7 +3,7 @@ import Jar from "../components/Jar";
 
 function SealedJar({ jar }) {
   return (
-    <Jar>
+    <Jar id={jar.jar_id}>
       <Jar.Title title={jar.title} />
       <Jar.Theme theme={jar.theme} />
       <Jar.Sharing user={jar.users} />
@@ -12,4 +12,4 @@ function SealedJar({ jar }) {
   );
 }
 
-export default SealedJar;
+export default React.memo(SealedJar);

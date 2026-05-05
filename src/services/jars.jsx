@@ -26,3 +26,23 @@ export const getJars = async (userId) => {
 
   return data;
 };
+
+export const getJarEntries = async (jarId) => {
+  const { data, error } = await supabase
+    .from("jars")
+    .select(
+      `
+      *, 
+      users(username),
+      jar_entries(*, 
+        users(username)
+      )
+      `,
+    )
+    .eq("id", jarId)
+    .single();
+
+  if (error) throw new Error(error.message);
+
+  return data;
+};

@@ -1,4 +1,4 @@
-import { QueryClient, useQuery } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { getJars } from "../../../services/jars";
 
 export const useJars = (userId) => {
