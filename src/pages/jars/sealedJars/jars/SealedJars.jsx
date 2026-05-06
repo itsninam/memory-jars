@@ -1,9 +1,10 @@
 import React, { useMemo } from "react";
-import { useJars } from "../hooks/useJars";
-import { useAuth } from "../../auth/context/AuthContext";
+import { useJars } from "../../hooks/useJars";
+import { useAuth } from "../../../auth/context/AuthContext";
 import SealedJar from "./SealedJar";
-import Loading from "../../../components/Loading";
-import Error from "../../../components/Error";
+import Loading from "../../../../components/Loading";
+import Error from "../../../../components/Error";
+import AddJar from "./AddJar";
 
 function SealedJars() {
   const { user } = useAuth();
@@ -35,11 +36,15 @@ function SealedJars() {
   if (formattedJars.length === 0) return <p>Add jars</p>;
 
   return (
-    <ul>
-      {formattedJars.map((jar) => {
-        return <SealedJar key={jar.id} jar={jar} />;
-      })}
-    </ul>
+    <>
+      <AddJar />
+
+      <ul>
+        {formattedJars.map((jar) => {
+          return <SealedJar key={jar.id} jar={jar} />;
+        })}
+      </ul>
+    </>
   );
 }
 

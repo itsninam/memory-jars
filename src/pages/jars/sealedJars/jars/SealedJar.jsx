@@ -1,5 +1,5 @@
 import React from "react";
-import Jar from "../components/Jar";
+import Jar from "../../components/Jar";
 
 function SealedJar({ jar }) {
   return (

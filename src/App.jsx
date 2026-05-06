@@ -3,9 +3,9 @@ import "./App.css";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import ProtectedRoute from "./pages/ProtectedRoute";
-import SealedJars from "./pages/jars/sealedJars/SealedJars";
-import JarEntries from "./pages/jars/sealedJars/JarEntries";
 import NotFound from "./components/NotFound";
+import SealedJars from "./pages/jars/sealedJars/jars/SealedJars";
+import JarEntries from "./pages/jars/sealedJars/jarEntries/JarEntries";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
 
         <Route element={<ProtectedRoute />}>
-          <Route path="/home" element={<SealedJars />}></Route>
+          <Route path="/home" element={<SealedJars />} />
           <Route path="/home/:id" element={<JarEntries />} />
         </Route>
 

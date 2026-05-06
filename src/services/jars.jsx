@@ -54,3 +54,24 @@ export const addJarEntry = async ({ jarId, entry, userId }) => {
 
   if (error) throw new Error(error.message);
 };
+
+export const addJar = async ({ createdBy, lockedUntil, theme, title }) => {
+  const { data } = await supabase
+    .from("jars")
+    .insert({
+      created_by: createdBy,
+      locked_until: lockedUntil,
+      theme: theme,
+      title: title,
+    })
+    .select()
+    .single();
+
+  const { error } = await supabase.from("jar_members").insert({
+    jar_id: data.id,
+    user_id: data.created_by,
+    role: "owner",
+  });
+
+  if (error) throw new Error(error.message);
+};

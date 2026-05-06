@@ -1,7 +1,7 @@
 import React from "react";
-import { formatDate } from "../../../utils/formatDate";
-import AddEntry from "./AddEntry";
-import GoBack from "../../../components/GoBack";
+import { formatDate } from "../../../../utils/formatDate";
+import AddEntry from "../jarEntries/AddEntry";
+import GoBack from "../../../../components/GoBack";
 
 function LockedJar({ data, jarHasEntries, jarId }) {
   return (

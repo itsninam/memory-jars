@@ -30,12 +30,16 @@ function AppForm({ children, onHandleSubmit }) {
   );
 }
 
-function Input({ type, name, errorMessage }) {
+function Input({ type, name, errorMessage, min }) {
   const { register, errors } = useAppFormContext();
 
   return (
     <>
-      <input type={type} {...register(name, { required: errorMessage })} />
+      <input
+        min={min}
+        type={type}
+        {...register(name, { required: errorMessage })}
+      />
       {errors[name] && <p>{errors[name].message}</p>}
     </>
   );

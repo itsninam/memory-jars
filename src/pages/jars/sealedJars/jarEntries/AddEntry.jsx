@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import AppForm from "../../../components/AppForm";
-import Button from "../../../components/Button";
-import { useAuth } from "../../auth/context/AuthContext";
-import { useAddJarEntry } from "../hooks/useAddJarEntry";
+import AppForm from "../../../../components/AppForm";
+import Button from "../../../../components/Button";
+import { useAuth } from "../../../auth/context/AuthContext";
+import { useAddJarEntry } from "../../hooks/useAddJarEntry";
 import { useQueryClient } from "@tanstack/react-query";
 
 function AddEntry({ jarId }) {
@@ -10,7 +10,7 @@ function AddEntry({ jarId }) {
   const { addJarEntry, isPending } = useAddJarEntry();
   const queryClient = useQueryClient();
   const { user } = useAuth();
-  
+
   const onSubmit = (data, { reset }) => {
     addJarEntry(
       {
