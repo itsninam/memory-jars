@@ -46,3 +46,11 @@ export const getJarEntries = async (jarId) => {
 
   return data;
 };
+
+export const addJarEntry = async ({ jarId, entry, userId }) => {
+  const { error } = await supabase
+    .from("jar_entries")
+    .insert({ jar_id: jarId, entry: entry, user_id: userId });
+
+  if (error) throw new Error(error.message);
+};
