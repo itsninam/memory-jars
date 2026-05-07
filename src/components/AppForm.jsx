@@ -1,52 +1,50 @@
-import React, { createContext, useContext } from "react";
-import { useForm } from "react-hook-form";
+import React from "react";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
 
-const AppFormContext = createContext(null);
-
-export const useAppFormContext = () => {
-  const context = useContext(AppFormContext);
-  if (!context) {
-    throw new Error("useAppFormContext must be used within a Provider");
-  }
-  return context;
-};
-
-function AppForm({ children, onHandleSubmit }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
+function AppForm({ children, onHandleSubmit, defaultValues }) {
+  const methods = useForm({ defaultValues });
 
   const wrappedSubmit = (data) => {
-    onHandleSubmit(data, { reset });
+    onHandleSubmit(data, { reset: methods.reset });
   };
 
   return (
-    <AppFormContext.Provider value={{ register, handleSubmit, errors, reset }}>
-      <form onSubmit={handleSubmit(wrappedSubmit)}>{children}</form>
-    </AppFormContext.Provider>
+    <FormProvider {...methods}>
+      <form onSubmit={methods.handleSubmit(wrappedSubmit)}>{children}</form>
+    </FormProvider>
   );
 }
 
-function Input({ type, name, errorMessage, min }) {
-  const { register, errors } = useAppFormContext();
+function Input({ type, name, errorMessage, min, id, value }) {
+  const { register } = useFormContext();
 
   return (
-    <>
-      <input
-        min={min}
-        type={type}
-        {...register(name, { required: errorMessage })}
-      />
-      {errors[name] && <p>{errors[name].message}</p>}
-    </>
+    <input
+      type={type}
+      min={min}
+      id={id}
+      {...(value !== undefined ? { value } : {})}
+      {...register(name, { required: errorMessage })}
+    />
   );
 }
 
-function Label({ label }) {
-  return <label>{label}</label>;
+function Error({ name }) {
+  const {
+    formState: { errors },
+  } = useFormContext();
+
+  if (!errors?.[name]) return null;
+
+  return <span>{errors[name].message}</span>;
+}
+
+function Label({ label, children }) {
+  return (
+    <label>
+      {label} {children}
+    </label>
+  );
 }
 
 function Message({ message, children }) {
@@ -57,8 +55,24 @@ function Message({ message, children }) {
   );
 }
 
+function Footer({ children }) {
+  return <footer>{children}</footer>;
+}
+
+function Header({ header }) {
+  return <h2>{header}</h2>;
+}
+
+function FlexContainer({ children }) {
+  return <div className="flex-container">{children}</div>;
+}
+
 AppForm.Input = Input;
 AppForm.Label = Label;
+AppForm.Error = Error;
 AppForm.Message = Message;
+AppForm.Footer = Footer;
+AppForm.Header = Header;
+AppForm.FlexContainer = FlexContainer;
 
 export default AppForm;
