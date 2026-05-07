@@ -1,15 +1,20 @@
 import React, { useState } from "react";
 import Button from "../../../../components/Button";
-import JarForm from "./JarForm";
+import NewJarForm from "./NewJarForm";
 
 function AddJar() {
   const [showAddJar, setShowAddJar] = useState(false);
 
   return (
     <>
-      <Button label="+ New Jar" onClick={() => setShowAddJar(true)} />
+      <Button
+        leftIcon="+"
+        label="New Jar"
+        onClick={() => setShowAddJar(true)}
+        className="primary"
+      />
 
-      {showAddJar ? <JarForm setShowAddJar={setShowAddJar} /> : null}
+      <NewJarForm setShowAddJar={setShowAddJar} showAddJar={showAddJar} />
     </>
   );
 }

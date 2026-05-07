@@ -1,0 +1,35 @@
+@use "./colors";
+
+button {
+  background-color: transparent;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 0px;
+  display: flex;
+  gap: 8px;
+
+  &:not(.text) {
+    padding: 8px 16px;
+  }
+
+  &.primary {
+    background-color: var(--button-primary-bg);
+    color: var(--button-primary-text);
+
+    &:hover {
+      background-color: var(--button-primary-hover);
+    }
+  }
+
+  &.secondary {
+    background-color: var(--button-secondary-bg);
+    color: var(--button-secondary-text);
+
+    &:hover {
+      background-color: var(--button-secondary-hover);
+    }
+  }
+}

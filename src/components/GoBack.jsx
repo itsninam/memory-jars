@@ -5,7 +5,14 @@ import Button from "./Button";
 function GoBack() {
   const navigate = useNavigate();
 
-  return <Button label="<" onClick={() => navigate(-1)} />;
+  return (
+    <Button
+      className="text"
+      leftIcon="&larr;"
+      label="Back to jars"
+      onClick={() => navigate(-1)}
+    />
+  );
 }
 
 export default GoBack;

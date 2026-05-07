@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
+import "./styles/App.scss";
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import NotFound from "./components/NotFound";
-import SealedJars from "./pages/jars/sealedJars/jars/SealedJars";
 import JarEntries from "./pages/jars/sealedJars/jarEntries/JarEntries";
+import SealedJarsList from "./pages/jars/sealedJars/jars/SealedJarsList";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
 
         <Route element={<ProtectedRoute />}>
-          <Route path="/home" element={<SealedJars />} />
+          <Route path="/home" element={<SealedJarsList />} />
           <Route path="/home/:id" element={<JarEntries />} />
         </Route>
 

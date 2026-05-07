@@ -9,6 +9,7 @@ import Error from "../../../../components/Error";
 import GoBack from "../../../../components/GoBack";
 import JarEntriesList from "./JarEntriesList";
 import AddEntry from "./AddEntry";
+import Header from "../../../../components/Header";
 
 function JarEntries() {
   const { id } = useParams();
@@ -21,14 +22,15 @@ function JarEntries() {
 
   if (isError) return <Error message={error.message} />;
 
-  if (jarIsLocked)
-    return <LockedJar data={data} jarHasEntries={jarHasEntries} jarId={id} />;
-
   return (
     <>
-      <GoBack />
-      <JarEntriesList data={data} />
-      <AddEntry jarId={id} />
+      <Header navigation={<GoBack />} actions={<AddEntry jarId={id} />} />
+
+      {jarIsLocked ? (
+        <LockedJar data={data} jarHasEntries={jarHasEntries} jarId={id} />
+      ) : (
+        <JarEntriesList data={data} />
+      )}
     </>
   );
 }

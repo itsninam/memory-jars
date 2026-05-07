@@ -1,0 +1,16 @@
+html {
+  font-size: 100%;
+}
+
+body {
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg);
+}
+
+ul,
+li {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+}

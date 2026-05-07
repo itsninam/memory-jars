@@ -5,8 +5,10 @@ import SealedJar from "./SealedJar";
 import Loading from "../../../../components/Loading";
 import Error from "../../../../components/Error";
 import AddJar from "./AddJar";
+import CardList from "../../../../components/card/CardList";
+import Header from "../../../../components/Header";
 
-function SealedJars() {
+function SealedJarsList() {
   const { user } = useAuth();
   const { data, isLoading, isError, error } = useJars(user.id);
 
@@ -37,15 +39,15 @@ function SealedJars() {
 
   return (
     <>
-      <AddJar />
+      <Header title="My Jars" actions={<AddJar />} />
 
-      <ul>
+      <CardList>
         {formattedJars.map((jar) => {
           return <SealedJar key={jar.id} jar={jar} />;
         })}
-      </ul>
+      </CardList>
     </>
   );
 }
 
-export default SealedJars;
+export default SealedJarsList;

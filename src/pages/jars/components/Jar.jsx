@@ -1,12 +1,13 @@
 import React from "react";
 import { formatDate } from "../../../utils/formatDate";
 import { Link } from "react-router-dom";
+import CardItem from "../../../components/card/CardItem";
 
 function Jar({ children, id }) {
   return (
-    <li>
+    <CardItem className="card-item">
       <Link to={`${id}`}>{children}</Link>
-    </li>
+    </CardItem>
   );
 }
 
