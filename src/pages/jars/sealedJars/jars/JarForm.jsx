@@ -19,6 +19,7 @@ function JarForm({ setShowAddJar }) {
         lockedUntil: data.date,
         theme: data.theme,
         title: data.title,
+        sharedWith: data.sharedWith,
       },
       {
         onSuccess: () => {

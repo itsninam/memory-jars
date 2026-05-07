@@ -55,8 +55,20 @@ export const addJarEntry = async ({ jarId, entry, userId }) => {
   if (error) throw new Error(error.message);
 };
 
-export const addJar = async ({ createdBy, lockedUntil, theme, title }) => {
-  const { data } = await supabase
+export const addJar = async ({
+  createdBy,
+  lockedUntil,
+  theme,
+  title,
+  sharedWith,
+}) => {
+  const sharedWithUser = sharedWith ? await getSharedUser(sharedWith) : null;
+
+  if (sharedWith && !sharedWithUser) {
+    throw new Error("User does not exist");
+  }
+
+  const { data, error } = await supabase
     .from("jars")
     .insert({
       created_by: createdBy,
@@ -67,11 +79,41 @@ export const addJar = async ({ createdBy, lockedUntil, theme, title }) => {
     .select()
     .single();
 
-  const { error } = await supabase.from("jar_members").insert({
-    jar_id: data.id,
-    user_id: data.created_by,
-    role: "owner",
-  });
+  if (error) throw new Error(error.message);
+
+  await addJarMembers(data, sharedWithUser);
+};
+
+const getSharedUser = async (user) => {
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("username", user)
+    .maybeSingle();
+
+  if (error) throw new Error(error.message);
+
+  return data;
+};
+
+const addJarMembers = async (data, sharedWithUser) => {
+  const jarMembers = [
+    {
+      jar_id: data.id,
+      user_id: data.created_by,
+      role: "owner",
+    },
+  ];
+
+  if (sharedWithUser !== null) {
+    jarMembers.push({
+      jar_id: data.id,
+      user_id: sharedWithUser.user_id,
+      role: "editor",
+    });
+  }
+
+  const { error } = await supabase.from("jar_members").insert(jarMembers);
 
   if (error) throw new Error(error.message);
 };
