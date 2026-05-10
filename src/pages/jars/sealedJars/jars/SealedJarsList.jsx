@@ -1,12 +1,13 @@
 import React, { useMemo } from "react";
-import { useJars } from "../../hooks/useJars";
-import { useAuth } from "../../../auth/context/AuthContext";
 import SealedJar from "./SealedJar";
 import Loading from "../../../../components/Loading";
 import Error from "../../../../components/Error";
 import AddJar from "./AddJar";
 import CardList from "../../../../components/card/CardList";
 import Header from "../../../../components/Header";
+
+import { useJars } from "../../hooks/useJars";
+import { useAuth } from "../../../auth/context/AuthContext";
 
 function SealedJarsList() {
   const { user } = useAuth();
@@ -27,6 +28,7 @@ function SealedJarsList() {
         theme: item.jars.theme,
         expiry: item.jars.locked_until,
         jar_id: item.jars.id,
+        entries: item.jars.jar_entries.length,
       };
     });
   }, [data, user.id]);
@@ -41,7 +43,7 @@ function SealedJarsList() {
     <>
       <Header title="My Jars" actions={<AddJar />} />
 
-      <CardList>
+      <CardList className="jar">
         {formattedJars.map((jar) => {
           return <SealedJar key={jar.id} jar={jar} />;
         })}

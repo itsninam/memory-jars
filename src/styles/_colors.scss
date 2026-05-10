@@ -1,5 +1,5 @@
 :root {
-  --color-bg: #f7f6ff;
+  --color-bg: #f9fafb;
   --color-surface: #ffffff;
   --color-surface-soft: #ece9ff;
 
@@ -7,11 +7,13 @@
   --color-text-secondary: #52526a;
   --color-text-muted: #8e8ea8;
 
-  --color-accent: #8b7cf8;
-  --color-accent-hover: #7a6aed;
-  --color-accent-soft: #ede9ff;
+  --color-accent: #9a8cff;
+  --color-accent-hover: #8576f5;
+  --color-accent-soft: #f0edff;
+  --color-accent-bold: #4f4a8a;
 
   --color-success: #27c98e;
+  --color-alert: #f5b942;
   --color-error: #f04f4f;
 
   --color-border: #e4e1f7;
@@ -23,4 +25,6 @@
   --button-secondary-bg: #d4f2e5;
   --button-secondary-hover: #beebd7;
   --button-secondary-text: #1a6e4a;
+
+  --color-box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 4px;
 }

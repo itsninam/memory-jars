@@ -36,12 +36,12 @@ function Error({ name }) {
 
   if (!errors?.[name]) return null;
 
-  return <span>{errors[name].message}</span>;
+  return <p className="error">{errors[name].message}</p>;
 }
 
-function Label({ label, children }) {
+function Label({ label, children, className }) {
   return (
-    <label>
+    <label className={className}>
       {label} {children}
     </label>
   );
@@ -67,6 +67,10 @@ function FlexContainer({ children }) {
   return <div className="flex-container">{children}</div>;
 }
 
+function FormField({ children }) {
+  return <div className="form-field">{children}</div>;
+}
+
 AppForm.Input = Input;
 AppForm.Label = Label;
 AppForm.Error = Error;
@@ -74,5 +78,6 @@ AppForm.Message = Message;
 AppForm.Footer = Footer;
 AppForm.Header = Header;
 AppForm.FlexContainer = FlexContainer;
+AppForm.FormField = FormField;
 
 export default AppForm;

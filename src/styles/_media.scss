@@ -1,0 +1,25 @@
+@media (max-width: 480px) {
+  // #root {
+  //   max-width: 85%;
+  // }
+
+  form {
+    width: 90%;
+    margin: 0 auto;
+
+    label:has(> input[type="radio"]) {
+      padding: 4px 10px;
+    }
+  }
+
+  .jar-container svg {
+    width: 60px;
+    height: 60px;
+  }
+}
+
+@media (max-width: 500px) {
+  #root {
+    max-width: 85%;
+  }
+}

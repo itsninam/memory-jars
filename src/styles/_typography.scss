@@ -3,6 +3,7 @@ html {
 }
 
 body {
+  font-family: "Inter", sans-serif;
   font-size: 1rem;
   color: var(--color-text-primary);
   background-color: var(--color-bg);
@@ -13,4 +14,17 @@ li {
   padding: 0px;
   margin: 0px;
   list-style: none;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+p {
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }

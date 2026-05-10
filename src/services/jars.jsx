@@ -11,6 +11,7 @@ export const getJars = async (userId) => {
         title,
         theme,
         locked_until,
+        jar_entries(*),
         jar_members (
           user_id,
           users (

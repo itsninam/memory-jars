@@ -3,62 +3,8 @@
 @use "button";
 @use "card";
 @use "header";
-
-/* form */
-
-form {
-  border: 1px solid lightgray;
-  padding: 24px;
-  width: 420px;
-  background-color: #fff;
-  border-radius: 12px;
-
-  label {
-    display: block;
-    font-weight: 600;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-    font-size: 0.75rem;
-  }
-
-  label:has(> input[type="radio"]) {
-    cursor: pointer;
-    border: 1px solid lightgrey;
-    padding: 8px;
-    width: fit-content;
-  }
-
-  label:has(> input[type="radio"]:checked) {
-    background-color: var(--color-accent);
-  }
-
-  label input[type="radio"] {
-    opacity: 0;
-    position: absolute;
-  }
-
-  input {
-    padding: 8px 16px;
-    border-radius: 4px;
-    border: 1px solid lightgray;
-    display: block;
-    width: 100%;
-  }
-
-  footer {
-    padding: 16px 0;
-    display: flex;
-    gap: 8px;
-    justify-content: right;
-  }
-
-  .flex-container {
-    display: flex;
-    justify-content: flex-start;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-}
+@use "form";
+@use "media";
 
 .flex-container {
   display: flex;
@@ -88,6 +34,86 @@ form {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
+}
+
+// jar
+.jar {
+  min-height: 0;
+  flex-shrink: 1;
+  overflow: scroll;
+
+  .icon-container {
+    position: relative;
+  }
+
+  .jar-container {
+    font-size: 88px;
+  }
+
+  .icon-theme {
+    position: absolute;
+    top: 56%;
+    left: 50%;
+    font-size: 28px;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  /* glass highlight */
+  // .jar-container::after {
+  //   content: "";
+  //   position: absolute;
+  //   bottom: 10px;
+  //   right: 12px;
+
+  //   width: 35%;
+  //   height: 45%;
+
+  //   background: rgba(255, 255, 255, 0.5);
+  //   border-radius: 50%;
+  //   filter: blur(3px);
+  //   pointer-events: none;
+  // }
+
+  h2 {
+    text-transform: capitalize;
+    font-size: 1.125rem;
+  }
+
+  .card-item {
+    padding-left: 8px;
+  }
+
+  .card-item a {
+    text-decoration: none;
+    color: var(--color-text-primary);
+  }
+
+  .flex-container {
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  p {
+    color: var(--color-text-muted);
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 1.375rem;
+  }
+
+  .private {
+    color: var(--color-accent-bold);
+  }
+
+  .entries {
+    background-color: var(--color-accent-soft);
+    color: var(--color-accent-hover);
+    margin-left: auto;
+    border-radius: 4px;
+    padding: 0px 4px;
+    font-size: 0.75rem;
+  }
 }
 
 /* themes
