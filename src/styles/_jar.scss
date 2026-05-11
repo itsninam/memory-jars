@@ -40,3 +40,16 @@
     padding: 0px 4px;
   }
 }
+
+.empty-jar-container {
+  margin: auto;
+
+  .empty-jar-message {
+    text-align: center;
+    margin-bottom: 12px;
+  }
+
+  > button {
+    margin: auto;
+  }
+}

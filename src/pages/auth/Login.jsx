@@ -21,26 +21,38 @@ function Login() {
   };
 
   return (
-    <AppForm onHandleSubmit={onSubmit}>
-      <AppForm.Label label="Enter your email" />
-      <AppForm.Input
-        type="email"
-        name="email"
-        errorMessage="Email is required"
-      />
-      <AppForm.Label label="Enter your password" />
-      <AppForm.Input
-        type="password"
-        name="password"
-        errorMessage="Password is required"
-      />
-      <Button
-        type="submit"
-        label={isPending ? "Login..." : "Login"}
-        disabled={isPending}
-      />
+    <AppForm onHandleSubmit={onSubmit} className="auth-form">
+      <AppForm.Header header="Login" />
+      <AppForm.FormField>
+        <AppForm.Label label="Enter your email" />
+        <AppForm.Input
+          type="email"
+          name="email"
+          errorMessage="Email is required"
+        />
+        <AppForm.Error name="email" />
+      </AppForm.FormField>
 
-      <AppForm.Message message="don't have an account?">
+      <AppForm.FormField>
+        <AppForm.Label label="Enter your password" />
+        <AppForm.Input
+          type="password"
+          name="password"
+          errorMessage="Password is required"
+        />
+        <AppForm.Error name="password" />
+      </AppForm.FormField>
+
+      <AppForm.Footer>
+        <Button
+          type="submit"
+          label={isPending ? "Login..." : "Login"}
+          disabled={isPending}
+          className="primary"
+        />
+      </AppForm.Footer>
+
+      <AppForm.Message message="Don't have an account?">
         <Link to="/signup">Signup</Link>
       </AppForm.Message>
     </AppForm>

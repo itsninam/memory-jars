@@ -4,6 +4,7 @@ form {
   width: 420px;
   background-color: var(--color-surface);
   border-radius: 12px;
+  margin: auto;
 
   .error {
     font-size: 0.625rem;
@@ -56,6 +57,7 @@ form {
     border: 1px solid var(--color-border);
     display: block;
     width: 100%;
+    font-size: 1rem;
   }
 
   footer {
@@ -79,5 +81,14 @@ form {
   .form-field {
     padding-bottom: 14px;
     position: relative;
+  }
+
+  &.auth-form {
+    width: 320px;
+
+    footer button {
+      width: 100%;
+      justify-content: center;
+    }
   }
 }

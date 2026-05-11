@@ -8,6 +8,7 @@ import Header from "../../../../components/Header";
 
 import { useJars } from "../../hooks/useJars";
 import { useAuth } from "../../../auth/context/AuthContext";
+import EmptyJarList from "./EmptyJarList";
 
 function SealedJarsList() {
   const { user } = useAuth();
@@ -37,7 +38,7 @@ function SealedJarsList() {
 
   if (isError) return <Error message={error.message} />;
 
-  if (formattedJars.length === 0) return <p>Add jars</p>;
+  if (formattedJars.length === 0) return <EmptyJarList />;
 
   return (
     <>
