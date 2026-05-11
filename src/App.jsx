@@ -16,7 +16,7 @@ function App() {
 
         <Route element={<ProtectedRoute />}>
           <Route path="/home" element={<SealedJarsList />} />
-          <Route path="/home/:id" element={<JarEntries />} />
+          <Route path="/home/:theme/:id" element={<JarEntries />} />
         </Route>
 
         <Route path="*" element={<NotFound />} />

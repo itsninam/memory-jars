@@ -1,14 +1,38 @@
 import React from "react";
-import { formatDate } from "../../../../utils/formatDate";
-import CardItem from "../../../../components/card/CardItem";
+import Card from "../../../../components/card/Card";
 
-function JarEntry({ entry }) {
+import { useAuth } from "../../../auth/context/AuthContext.jsx";
+import { formatDate } from "../../../../utils/formatDate";
+import { getThemeIconObj } from "../../../../utils/getIconTheme";
+
+function JarEntry({ theme, entry }) {
+  const { user } = useAuth();
+  const createdDate = formatDate(entry.created_at);
+  const themeColor = getThemeIconObj(theme);
+  const borderColor = `2px solid ${getThemeIconObj(theme).color}`;
+
+  const isAuthUser = entry.user_id === user.id;
+  const userName = isAuthUser ? "You" : entry.users.username;
+
   return (
-    <CardItem>
-      <p>{entry.users.username}</p>
-      <p>{formatDate(entry.created_at)}</p>
-      <p>{entry.entry}</p>
-    </CardItem>
+    <Card>
+      <Card.FlexContainer>
+        <Card.Icon style={{ backgroundColor: themeColor.backgroundColor }}>
+          <p>😄</p>
+        </Card.Icon>
+        <div>
+          <Card.Title
+            style={{ color: isAuthUser ? themeColor.color : null }}
+            title={userName}
+          />
+          <Card.Meta>mood</Card.Meta>
+        </div>
+        <Card.Meta className="context">{createdDate}</Card.Meta>
+      </Card.FlexContainer>
+      <Card.Meta className="entry-message" style={{ borderLeft: borderColor }}>
+        {entry.entry}
+      </Card.Meta>
+    </Card>
   );
 }
 

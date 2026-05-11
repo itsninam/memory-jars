@@ -12,7 +12,7 @@ import AddEntry from "./AddEntry";
 import Header from "../../../../components/Header";
 
 function JarEntries() {
-  const { id } = useParams();
+  const { theme, id } = useParams();
 
   const { data, isLoading, isError, error } = useJarEntries(Number(id));
   const jarIsLocked = compareDate(data?.locked_until);
@@ -29,7 +29,7 @@ function JarEntries() {
       {jarIsLocked ? (
         <LockedJar data={data} jarHasEntries={jarHasEntries} jarId={id} />
       ) : (
-        <JarEntriesList data={data} />
+        <JarEntriesList data={data} theme={theme} />
       )}
     </>
   );

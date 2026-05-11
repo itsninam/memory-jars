@@ -11,4 +11,23 @@
     border-radius: 16px;
     box-shadow: var(--color-box-shadow);
   }
+
+  .context {
+    margin-left: auto;
+  }
+
+  .flex-container {
+    align-items: flex-start;
+  }
+
+  p {
+    font-weight: 500;
+    font-size: 0.75rem;
+    line-height: 1.375rem;
+    color: var(--color-text-muted);
+  }
+
+  h2 {
+    text-transform: capitalize;
+  }
 }
