@@ -5,15 +5,10 @@ function JarSvg({ fill, id }) {
   const gradId = `fillGrad-${id}`;
 
   return (
-    <svg
-      width="80"
-      height="80"
-      viewBox="0 0 160 200"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="46" viewBox="20 0 120 200" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <clipPath id={clipId}>
-          <path d="M30 60 Q28 58 26 55 L22 40 Q20 35 30 33 L130 33 Q140 35 138 40 L134 55 Q132 58 130 60 L128 180 Q128 190 118 192 L42 192 Q32 190 32 180 Z" />
+          <rect x="20" y="40" width="120" height="152" rx="18" />
         </clipPath>
         <linearGradient id={gradId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor={fill} />
@@ -21,41 +16,86 @@ function JarSvg({ fill, id }) {
         </linearGradient>
       </defs>
 
-      <path
-        d="M30 60 Q28 58 26 55 L22 40 Q20 35 30 33 L130 33 Q140 35 138 40 L134 55 Q132 58 130 60 L128 180 Q128 190 118 192 L42 192 Q32 190 32 180 Z"
+      <rect
+        x="20"
+        y="40"
+        width="120"
+        height="152"
+        rx="18"
         fill="white"
         stroke="#E5E7EB"
         strokeWidth="1.5"
       />
 
       <rect
-        x="22"
+        x="20"
         y="40"
-        width="116"
+        width="120"
         height="152"
         fill={`url(#${gradId})`}
+        opacity="0.45"
         clipPath={`url(#${clipId})`}
       />
 
       <rect
-        x="18"
-        y="24"
-        width="124"
-        height="16"
+        x="32"
+        y="54"
+        width="7"
+        height="124"
+        rx="3.5"
+        fill="white"
+        opacity="0.55"
+      />
+
+      <rect
+        x="30"
+        y="28"
+        width="100"
+        height="14"
         rx="5"
-        fill="#F9FAFB"
+        fill="#F5F5F7"
         stroke="#E5E7EB"
-        strokeWidth="1.5"
+        strokeWidth="1.2"
+      />
+
+      <rect x="52" y="13" width="56" height="17" rx="4" fill="#C8975A" />
+      <rect
+        x="54"
+        y="15"
+        width="52"
+        height="5"
+        rx="2"
+        fill="#DEBA82"
+        opacity="0.55"
       />
       <rect
-        x="50"
-        y="17"
-        width="60"
-        height="13"
-        rx="4"
-        fill="#F9FAFB"
-        stroke="#E5E7EB"
-        strokeWidth="1.5"
+        x="54"
+        y="23"
+        width="52"
+        height="1.5"
+        rx="1"
+        fill="#B8824A"
+        opacity="0.35"
+      />
+      <rect
+        x="54"
+        y="27"
+        width="52"
+        height="1.5"
+        rx="1"
+        fill="#B8824A"
+        opacity="0.35"
+      />
+
+      <rect x="56" y="5" width="48" height="11" rx="5" fill="#DEBA82" />
+      <rect
+        x="58"
+        y="6"
+        width="44"
+        height="4"
+        rx="2"
+        fill="#E8C88E"
+        opacity="0.6"
       />
     </svg>
   );

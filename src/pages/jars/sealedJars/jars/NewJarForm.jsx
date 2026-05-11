@@ -4,11 +4,11 @@ import AppForm from "../../../../components/AppForm";
 import ShareJar from "./ShareJar";
 import Modal from "../../../../components/Modal";
 
-import { jarThemes } from "./jarThemes";
 import { LuLock } from "react-icons/lu";
 import { useAddJar } from "../../hooks/useAddJar";
 import { useAuth } from "../../../auth/context/AuthContext";
 import { useQueryClient } from "@tanstack/react-query";
+import { jarThemes } from "./config/jarThemes";
 
 function NewJarForm({ setShowAddJar, showAddJar }) {
   const { addJar, isPending } = useAddJar();

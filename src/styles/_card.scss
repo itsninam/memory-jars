@@ -18,12 +18,10 @@
 
   .flex-container {
     align-items: flex-start;
+    gap: 8px;
   }
 
   p {
-    font-weight: 500;
-    font-size: 0.75rem;
-    line-height: 1.375rem;
     color: var(--color-text-muted);
   }
 

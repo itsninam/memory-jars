@@ -1,13 +1,15 @@
 import React, { Fragment } from "react";
 import Card from "../../../../components/card/Card";
 
-import { getThemeIcon, getThemeIconObj } from "../../../../utils/getIconTheme";
+import { getThemeIcon } from "../../../../utils/getIconTheme";
 import { LuClock3, LuLock, LuUsers } from "react-icons/lu";
 import { formatDate } from "../../../../utils/formatDate";
+import { getCategory } from "../../../../utils/getCategory";
+import { jarThemes } from "./config/jarThemes";
 
 function SealedJar({ jar }) {
   const themeIcon = getThemeIcon(jar.theme);
-  const themeColor = getThemeIconObj(jar.theme).color;
+  const themeColor = getCategory(jar.theme, jarThemes).color;
   const lockedDate = formatDate(jar.expiry);
   const entriesText = jar.entries > 0 ? `${jar.entries} notes` : null;
 
@@ -17,8 +19,8 @@ function SealedJar({ jar }) {
         <Card.FlexContainer>
           <Card.Icon>{themeIcon}</Card.Icon>
           <div>
-            <Card.Title title={jar.title} />
-            <Card.Subtitle style={{ color: themeColor }}>
+            <Card.Title title={jar.title} className="title" />
+            <Card.Subtitle style={{ color: themeColor }} className="caption">
               {jar.theme}
             </Card.Subtitle>
             <Card.Meta>

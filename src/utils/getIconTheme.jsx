@@ -1,17 +1,10 @@
 import JarSvg from "../pages/jars/sealedJars/jars/JarSvg";
-import { jarThemes } from "../pages/jars/sealedJars/jars/jarThemes";
+import { jarThemes } from "../pages/jars/sealedJars/jars/config/jarThemes";
 import { Fragment } from "react";
-
-const getTheme = (theme) => {
-  return jarThemes.find((th) => th.label === theme);
-};
-
-export const getThemeIconObj = (theme) => {
-  return getTheme(theme);
-};
+import { getCategory } from "./getCategory";
 
 export const getThemeIcon = (theme) => {
-  const themeObj = getThemeIconObj(theme);
+  const themeObj = getCategory(theme, jarThemes);
 
   const Icon = themeObj?.icon;
 

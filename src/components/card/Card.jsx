@@ -10,24 +10,36 @@ function Navigation({ navigateTo, children }) {
   return <Link to={`${navigateTo}`}>{children}</Link>;
 }
 
-function Title({ title, style }) {
-  return <h2 style={style}>{title}</h2>;
-}
-
-function Subtitle({ children, style }) {
-  return <p style={style}>{children}</p>;
-}
-
-function Meta({ children, className, style }) {
+function Title({ title, style, className }) {
   return (
-    <p style={style} className={className}>
+    <h2 style={style} className={className}>
+      {title}
+    </h2>
+  );
+}
+
+function Subtitle({ children, style, className }) {
+  return (
+    <p className={className} style={style}>
       {children}
     </p>
   );
 }
 
-function Context({ context, className }) {
-  return <p className={className}>{context}</p>;
+function Meta({ children, className, style }) {
+  return (
+    <p style={style} className={`caption ${className ?? ""}`}>
+      {children}
+    </p>
+  );
+}
+
+function Body({ children, className, style }) {
+  return (
+    <p style={style} className={className}>
+      {children}
+    </p>
+  );
 }
 
 function FlexContainer({ children }) {
@@ -48,6 +60,6 @@ Card.Subtitle = Subtitle;
 Card.Meta = Meta;
 Card.FlexContainer = FlexContainer;
 Card.Icon = Icon;
-Card.Context = Context;
+Card.Body = Body;
 
 export default Card;

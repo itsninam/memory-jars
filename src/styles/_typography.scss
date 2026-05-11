@@ -5,6 +5,7 @@ html {
 body {
   font-family: "Inter", sans-serif;
   font-size: 1rem;
+  line-height: 1.65;
   color: var(--color-text-primary);
   background-color: var(--color-bg);
 }
@@ -27,4 +28,20 @@ p {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+
+.title {
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.subtitle {
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.caption {
+  font-weight: 500;
+  font-size: 0.75rem;
+  line-height: 1.55;
 }

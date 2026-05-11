@@ -29,6 +29,20 @@ function Input({ type, name, errorMessage, min, id, value }) {
   );
 }
 
+function TextArea({ id, name, rows, cols, errorMessage }) {
+  const { register } = useFormContext();
+
+  return (
+    <textarea
+      id={id}
+      name={name}
+      rows={rows}
+      cols={cols}
+      {...register(name, { required: errorMessage })}
+    ></textarea>
+  );
+}
+
 function Error({ name }) {
   const {
     formState: { errors },
@@ -79,5 +93,6 @@ AppForm.Footer = Footer;
 AppForm.Header = Header;
 AppForm.FlexContainer = FlexContainer;
 AppForm.FormField = FormField;
+AppForm.TextArea = TextArea;
 
 export default AppForm;

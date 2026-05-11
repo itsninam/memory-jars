@@ -12,7 +12,11 @@ function ShareJar() {
   return (
     <>
       <AppForm.Label label="Share with">
-        <AppForm.Input type="text" name="shareWith" />
+        <AppForm.Input
+          type="text"
+          name="shareWith"
+          errorMessage="Please enter a name"
+        />
       </AppForm.Label>
       <AppForm.Error name="shareWith" />
     </>

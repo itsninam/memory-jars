@@ -1,8 +1,4 @@
 @media (max-width: 480px) {
-  // #root {
-  //   max-width: 85%;
-  // }
-
   form {
     width: 90%;
     margin: 0 auto;
@@ -12,9 +8,30 @@
     }
   }
 
-  .jar-container svg {
-    width: 60px;
-    height: 60px;
+  .jar {
+    .jar-container svg {
+      height: 72px;
+    }
+
+    .context {
+      font-size: 0.625rem;
+    }
+  }
+
+  .jar-entry {
+    .icon-container {
+      padding: 4px 8px;
+    }
+  }
+
+  .title {
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .subtitle {
+    font-size: 0.75rem;
+    line-height: 1.6;
   }
 }
 
