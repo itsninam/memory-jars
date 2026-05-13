@@ -10,7 +10,7 @@ function ProtectedRoute() {
   if (isLoading) return <Loading />;
 
   if (!user) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   return <Outlet />;

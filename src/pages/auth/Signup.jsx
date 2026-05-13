@@ -54,7 +54,7 @@ function Signup() {
       </AppForm.Footer>
 
       <AppForm.Message message="Already have an account?">
-        <Link to="/">Login</Link>
+        <Link to="/login">Login</Link>
       </AppForm.Message>
     </AppForm>
   );

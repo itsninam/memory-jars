@@ -16,7 +16,7 @@ const queryClient = new QueryClient({
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <HashRouter basename="/memory-jars">
+    <HashRouter>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
           <App />
