@@ -6,6 +6,8 @@ html {
 
 body {
   margin: 0;
+  overflow: hidden;
+  touch-action: none;
 }
 
 #root {
@@ -14,6 +16,7 @@ body {
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100dvh;
 }
 
 article,
@@ -156,9 +159,6 @@ legend {
 progress {
   display: inline-block;
   vertical-align: baseline;
-}
-textarea {
-  overflow: auto;
 }
 [type="checkbox"],
 [type="radio"] {
