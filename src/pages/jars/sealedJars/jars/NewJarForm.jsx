@@ -14,7 +14,11 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
   const { addJar, isPending } = useAddJar();
   const { user } = useAuth();
   const queryClient = useQueryClient();
-  const todaysDate = new Date().toISOString().split("T")[0];
+  const date = new Date();
+  const todaysDate = date.toISOString().split("T")[0];
+
+  date.setDate(date.getDate() + 5);
+  const minFiveDays = date.toISOString().split("T")[0];
 
   const onSubmit = (data, { reset }) => {
     addJar(
@@ -39,7 +43,10 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
 
   return (
     <Modal isOpen={showAddJar} onClick={() => setShowAddJar(false)}>
-      <AppForm onHandleSubmit={onSubmit} defaultValues={{ privacy: "private" }}>
+      <AppForm
+        onHandleSubmit={onSubmit}
+        defaultValues={{ privacy: "private", date: todaysDate }}
+      >
         <AppForm.Header header="Create new jar" />
 
         <AppForm.FormField>
@@ -83,7 +90,7 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
             <AppForm.Input
               type="date"
               name="date"
-              min={todaysDate}
+              min={minFiveDays}
               errorMessage="Date is required"
             />
           </AppForm.Label>

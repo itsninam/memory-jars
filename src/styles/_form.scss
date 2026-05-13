@@ -55,14 +55,21 @@ form {
   input[type="date"],
   textarea,
   input {
+    width: 100%;
+    box-sizing: border-box;
     padding: 8px 16px;
     border-radius: 4px;
     border: 1px solid var(--color-border);
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
     display: block;
     width: 100%;
     font-size: 1rem;
-    color: var(--color-text-primary);
     margin-top: 4px;
+    -webkit-appearance: none;
+    appearance: none;
+    -webkit-text-fill-color: var(--color-text-primary);
+    opacity: 1;
   }
 
   footer {
@@ -122,7 +129,7 @@ form {
       }
 
       &:has(> input[type="radio"]:checked) {
-        border: 1px solid var(--color-accent-hover);
+        border: 2px solid var(--color-accent-hover);
         background-color: unset;
         color: unset;
       }
