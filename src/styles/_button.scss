@@ -4,11 +4,13 @@ button {
   background-color: transparent;
   border: 2px solid transparent;
   border-radius: 4px;
+  color: var(--color-text-primary);
   cursor: pointer;
   font-weight: 600;
   font-size: 0.875rem;
   padding: 0px;
   display: flex;
+  justify-content: center;
   gap: 8px;
 
   &:not(.text) {

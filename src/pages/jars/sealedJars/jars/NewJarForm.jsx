@@ -4,7 +4,7 @@ import AppForm from "../../../../components/AppForm";
 import ShareJar from "./ShareJar";
 import Modal from "../../../../components/Modal";
 
-import { LuLock } from "react-icons/lu";
+import { LuLock, LuUsers } from "react-icons/lu";
 import { useAddJar } from "../../hooks/useAddJar";
 import { useAuth } from "../../../auth/context/AuthContext";
 import { useQueryClient } from "@tanstack/react-query";
@@ -79,7 +79,7 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
         </AppForm.FormField>
 
         <AppForm.FormField>
-          <AppForm.Label label="Lock until">
+          <AppForm.Label label="Seal until">
             <AppForm.Input
               type="date"
               name="date"
@@ -90,14 +90,21 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
           <AppForm.Error name="date" />
         </AppForm.FormField>
 
-        <AppForm.Label label="Access type">
+        <AppForm.Label label="Access type" className="access">
           <AppForm.FormField>
             <AppForm.FlexContainer>
               <AppForm.Label
                 label={
                   <>
-                    <LuLock />
-                    private
+                    <div className="icon-container">
+                      <LuLock />
+                    </div>
+                    <div>
+                      <p>Private</p>
+                      <span className="caption">
+                        Only you can view this jar
+                      </span>
+                    </div>
                   </>
                 }
               >
@@ -109,7 +116,21 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
                 />
               </AppForm.Label>
 
-              <AppForm.Label label="shared">
+              <AppForm.Label
+                label={
+                  <>
+                    <div className="icon-container">
+                      <LuUsers />
+                    </div>
+                    <div>
+                      <p>Shared</p>
+                      <span className="caption">
+                        Invite others to contribute to this jar
+                      </span>
+                    </div>
+                  </>
+                }
+              >
                 <AppForm.Input
                   type="radio"
                   name="privacy"

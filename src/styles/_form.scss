@@ -1,10 +1,12 @@
 form {
   border: 1px solid var(--color-border);
-  padding: 24px;
-  width: 420px;
+  padding: 16px;
+  width: 540px;
   background-color: var(--color-surface);
   border-radius: 12px;
   margin: auto;
+  max-height: 95vh;
+  overflow: scroll;
 
   .error {
     font-size: 0.625rem;
@@ -50,6 +52,7 @@ form {
     width: 0;
   }
 
+  input[type="date"],
   textarea,
   input {
     padding: 8px 16px;
@@ -58,6 +61,8 @@ form {
     display: block;
     width: 100%;
     font-size: 1rem;
+    color: var(--color-text-primary);
+    margin-top: 4px;
   }
 
   footer {
@@ -72,10 +77,11 @@ form {
     justify-content: flex-start;
     gap: 8px;
     flex-wrap: wrap;
+    margin-top: 4px;
   }
 
   h2 {
-    margin-bottom: 8px;
+    margin-bottom: 16px;
   }
 
   .form-field {
@@ -88,7 +94,54 @@ form {
 
     footer button {
       width: 100%;
+    }
+
+    .caption.message {
+      margin-top: 8px;
       justify-content: center;
+    }
+  }
+
+  .access .flex-container {
+    flex-wrap: nowrap;
+    gap: 12px;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 8px;
+      padding: 8px 12px;
+      flex: 1;
+      width: 100%;
+
+      &:hover {
+        border-color: var(--color-accent-hover);
+        color: unset;
+        background-color: unset;
+      }
+
+      &:has(> input[type="radio"]:checked) {
+        border: 1px solid var(--color-accent-hover);
+        background-color: unset;
+        color: unset;
+      }
+
+      .icon-container {
+        flex-shrink: 0;
+        background-color: var(--color-accent-soft);
+        color: var(--color-accent-hover);
+        border-radius: 50%;
+        padding: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .caption {
+        color: var(--color-text-secondary);
+        font-weight: 400;
+      }
     }
   }
 }

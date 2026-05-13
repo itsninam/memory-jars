@@ -68,7 +68,7 @@ function Label({ label, children, className }) {
 
 function Message({ message, children }) {
   return (
-    <p>
+    <p className="caption message">
       {message} {children}
     </p>
   );
