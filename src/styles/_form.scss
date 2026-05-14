@@ -123,21 +123,32 @@ form {
       width: 100%;
 
       &:hover {
-        border-color: var(--color-accent-hover);
+        border: 1px solid var(--color-accent-hover);
+        box-shadow: inset 0 0 0 1px var(--color-accent-hover);
         color: unset;
         background-color: unset;
+
+        .icon-container {
+          background-color: var(--color-accent-soft);
+          color: var(--color-accent-hover);
+        }
       }
 
       &:has(> input[type="radio"]:checked) {
         border: 2px solid var(--color-accent-hover);
         background-color: unset;
         color: unset;
+
+        .icon-container {
+          background-color: var(--color-accent-soft);
+          color: var(--color-accent-hover);
+        }
       }
 
       .icon-container {
         flex-shrink: 0;
-        background-color: var(--color-accent-soft);
-        color: var(--color-accent-hover);
+        background-color: var(--color-surface-soft);
+        color: var(--color-text-muted);
         border-radius: 50%;
         padding: 12px;
         display: flex;
@@ -151,4 +162,8 @@ form {
       }
     }
   }
+}
+
+.react-datepicker-wrapper.datePicker {
+  display: block;
 }

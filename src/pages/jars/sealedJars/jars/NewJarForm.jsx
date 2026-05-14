@@ -3,22 +3,23 @@ import Button from "../../../../components/Button";
 import AppForm from "../../../../components/AppForm";
 import ShareJar from "./ShareJar";
 import Modal from "../../../../components/Modal";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import { LuLock, LuUsers } from "react-icons/lu";
 import { useAddJar } from "../../hooks/useAddJar";
 import { useAuth } from "../../../auth/context/AuthContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { jarThemes } from "./config/jarThemes";
+import { Controller } from "react-hook-form";
+import { addDays } from "date-fns";
 
 function NewJarForm({ setShowAddJar, showAddJar }) {
   const { addJar, isPending } = useAddJar();
   const { user } = useAuth();
   const queryClient = useQueryClient();
-  const date = new Date();
-  const todaysDate = date.toISOString().split("T")[0];
 
-  date.setDate(date.getDate() + 5);
-  const minFiveDays = date.toISOString().split("T")[0];
+  const minDate = addDays(new Date(), 5);
 
   const onSubmit = (data, { reset }) => {
     addJar(
@@ -45,7 +46,7 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
     <Modal isOpen={showAddJar} onClick={() => setShowAddJar(false)}>
       <AppForm
         onHandleSubmit={onSubmit}
-        defaultValues={{ privacy: "private", date: todaysDate }}
+        defaultValues={{ privacy: "private", date: null }}
       >
         <AppForm.Header header="Create new jar" />
 
@@ -86,14 +87,22 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
         </AppForm.FormField>
 
         <AppForm.FormField>
-          <AppForm.Label label="Seal until">
-            <AppForm.Input
-              type="date"
-              name="date"
-              min={minFiveDays}
-              errorMessage="Date is required"
-            />
-          </AppForm.Label>
+          <AppForm.Label label="Seal until" />
+          <Controller
+            name="date"
+            rules={{ required: "Date is required" }}
+            render={({ field }) => (
+              <DatePicker
+                wrapperClassName="datePicker"
+                popperProps={{ strategy: "fixed" }}
+                selected={field.value}
+                onChange={field.onChange}
+                minDate={minDate}
+                dateFormat="yyyy-MM-dd"
+                placeholderText="Select a date"
+              />
+            )}
+          />
           <AppForm.Error name="date" />
         </AppForm.FormField>
 
