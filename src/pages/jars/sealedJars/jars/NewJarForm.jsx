@@ -1,10 +1,11 @@
-import React from "react";
+import React, { Fragment, useRef, useEffect } from "react";
 import Button from "../../../../components/Button";
 import AppForm from "../../../../components/AppForm";
 import ShareJar from "./ShareJar";
 import Modal from "../../../../components/Modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Error from "../../../../components/Error";
 
 import { LuLock, LuUsers } from "react-icons/lu";
 import { useAddJar } from "../../hooks/useAddJar";
@@ -15,9 +16,10 @@ import { Controller } from "react-hook-form";
 import { addDays } from "date-fns";
 
 function NewJarForm({ setShowAddJar, showAddJar }) {
-  const { addJar, isPending } = useAddJar();
+  const { addJar, isPending, isError, error } = useAddJar();
   const { user } = useAuth();
   const queryClient = useQueryClient();
+  const formRef = useRef(null);
 
   const minDate = addDays(new Date(), 5);
 
@@ -28,7 +30,7 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
         lockedUntil: data.date,
         theme: data.theme,
         title: data.title,
-        sharedWith: data.sharedWith,
+        sharedWith: data.shareWith,
       },
       {
         onSuccess: () => {
@@ -40,6 +42,10 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
     );
   };
 
+  useEffect(() => {
+    if (error && formRef.current) formRef.current.scrollTo(0, 0);
+  }, [error]);
+
   if (!showAddJar) return null;
 
   return (
@@ -47,8 +53,11 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
       <AppForm
         onHandleSubmit={onSubmit}
         defaultValues={{ privacy: "private", date: null }}
+        ref={formRef}
       >
         <AppForm.Header header="Create new jar" />
+
+        {isError ? <Error message={error.message} className="caption" /> : null}
 
         <AppForm.FormField>
           <AppForm.Label label="Title">
@@ -100,6 +109,7 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
                 minDate={minDate}
                 dateFormat="yyyy-MM-dd"
                 placeholderText="Select a date"
+                inputMode="none"
               />
             )}
           />

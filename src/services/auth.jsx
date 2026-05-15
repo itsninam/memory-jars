@@ -1,14 +1,35 @@
 import { supabase } from "../lib/supabase";
 
-export const signUp = async ({ email, password }) => {
+export const signUp = async ({ email, password, username }) => {
+  const usernameExists = await checkUsernameExists(username);
+
+  if (usernameExists) {
+    throw new Error("Username already exists");
+  }
+
   const { data, error } = await supabase.auth.signUp({
-    email: email,
-    password: password,
+    email,
+    password,
+    options: {
+      data: { username },
+    },
   });
 
-  if (error) throw new Error(error.message);
+  if (error) {
+    throw new Error(error.message);
+  }
 
   return data;
+};
+
+export const checkUsernameExists = async (username) => {
+  const { data } = await supabase
+    .from("users")
+    .select("username")
+    .eq("username", username)
+    .maybeSingle();
+
+  return !!data;
 };
 
 export const login = async ({ email, password }) => {

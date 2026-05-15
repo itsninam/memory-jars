@@ -2,13 +2,14 @@ import { useMutation } from "@tanstack/react-query";
 import { signUp as signUpApi } from "../../../services/auth";
 
 export const useSignUp = () => {
-  const { mutate: signUp, isPending } = useMutation({
+  const {
+    mutate: signUp,
+    isPending,
+    isError,
+    error,
+  } = useMutation({
     mutationFn: signUpApi,
-    onError: (error) => {
-      console.log(error.message);
-      alert(error.message);
-    },
   });
 
-  return { signUp, isPending };
+  return { signUp, isPending, isError, error };
 };

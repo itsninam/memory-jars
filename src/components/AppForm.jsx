@@ -1,7 +1,7 @@
 import React from "react";
 import { FormProvider, useForm, useFormContext } from "react-hook-form";
 
-function AppForm({ children, onHandleSubmit, defaultValues, className }) {
+function AppForm({ children, onHandleSubmit, defaultValues, className, ref }) {
   const methods = useForm({ defaultValues });
 
   const wrappedSubmit = (data) => {
@@ -13,6 +13,7 @@ function AppForm({ children, onHandleSubmit, defaultValues, className }) {
       <form
         onSubmit={methods.handleSubmit(wrappedSubmit)}
         className={className}
+        ref={ref}
       >
         {children}
       </form>

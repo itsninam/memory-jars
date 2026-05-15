@@ -96,8 +96,19 @@ form {
     position: relative;
   }
 
+  .error-message.caption {
+    position: absolute;
+    top: 40px;
+  }
+
   &.auth-form {
     width: 320px;
+    position: relative;
+
+    .error-message {
+      position: absolute;
+      top: 42px;
+    }
 
     footer button {
       width: 100%;

@@ -3,18 +3,19 @@ import AppForm from "../../components/AppForm";
 import Button from "../../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignUp } from "./hooks/useSignUp";
+import Error from "../../components/Error";
 
 function Signup() {
-  const { signUp, isPending } = useSignUp();
+  const { signUp, isPending, isError, error } = useSignUp();
   const navigate = useNavigate();
 
   const onSubmit = (data, { reset }) => {
     signUp(
-      { email: data.email, password: data.password },
+      { email: data.email, password: data.password, username: data.username },
       {
         onSuccess: () => {
           reset();
-          navigate("/");
+          navigate("/login");
         },
       },
     );
@@ -23,6 +24,8 @@ function Signup() {
   return (
     <AppForm onHandleSubmit={onSubmit} className="auth-form">
       <AppForm.Header header="Sign up" />
+
+      {isError ? <Error message={error.message} className="caption" /> : null}
 
       <AppForm.FormField>
         <AppForm.Label label="Enter your email" />
@@ -35,7 +38,17 @@ function Signup() {
       </AppForm.FormField>
 
       <AppForm.FormField>
-        <AppForm.Label label="Enter your password" />
+        <AppForm.Label label="Enter a username" />
+        <AppForm.Input
+          type="username"
+          name="username"
+          errorMessage="Username is required"
+        />
+        <AppForm.Error name="email" />
+      </AppForm.FormField>
+
+      <AppForm.FormField>
+        <AppForm.Label label="Enter a password" />
         <AppForm.Input
           type="password"
           name="password"
