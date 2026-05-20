@@ -6,6 +6,7 @@ import Modal from "../../../../components/Modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Error from "../../../../components/Error";
+import IconContainer from "../../../../components/IconContainer";
 
 import { LuLock, LuUsers } from "react-icons/lu";
 import { useAddJar } from "../../hooks/useAddJar";
@@ -123,9 +124,9 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
               <AppForm.Label
                 label={
                   <>
-                    <div className="icon-container">
+                    <IconContainer>
                       <LuLock />
-                    </div>
+                    </IconContainer>
                     <div>
                       <p>Private</p>
                       <span className="caption">
@@ -146,9 +147,9 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
               <AppForm.Label
                 label={
                   <>
-                    <div className="icon-container">
+                    <IconContainer>
                       <LuUsers />
-                    </div>
+                    </IconContainer>
                     <div>
                       <p>Shared</p>
                       <span className="caption">

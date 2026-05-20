@@ -2,6 +2,7 @@ import JarSvg from "../pages/jars/sealedJars/jars/JarSvg";
 import { jarThemes } from "../pages/jars/sealedJars/jars/config/jarThemes";
 import { Fragment } from "react";
 import { getCategory } from "./getCategory";
+import styles from "../styles/Icon.module.scss";
 
 export const getThemeIcon = (theme) => {
   const themeObj = getCategory(theme, jarThemes);
@@ -14,7 +15,7 @@ export const getThemeIcon = (theme) => {
         <JarSvg fill={themeObj.backgroundColor} id={themeObj.label} />
       </div>
 
-      <Icon fill={themeObj.color} className="icon-theme" />
+      <Icon fill={themeObj.color} className={styles.iconTheme} />
     </>
   ) : null;
 };

@@ -1,17 +1,22 @@
-import React, { Fragment } from "react";
+import React from "react";
 import Card from "../../../../components/card/Card";
+import IconLabel from "../../../../components/IconLabel";
 
 import { getThemeIcon } from "../../../../utils/getIconTheme";
 import { LuClock3, LuLock, LuUsers } from "react-icons/lu";
 import { formatDate } from "../../../../utils/formatDate";
 import { getCategory } from "../../../../utils/getCategory";
 import { jarThemes } from "./config/jarThemes";
+import { getPluralSuffix } from "../../../../utils/getPluralSuffix";
 
 function SealedJar({ jar }) {
   const themeIcon = getThemeIcon(jar.theme);
   const themeColor = getCategory(jar.theme, jarThemes).color;
   const lockedDate = formatDate(jar.expiry);
-  const entriesText = jar.entries > 0 ? `${jar.entries} notes` : null;
+  const entriesText =
+    jar.entries > 0
+      ? `${jar.entries} ${getPluralSuffix(jar.entries, "note")}`
+      : null;
 
   return (
     <Card>
@@ -23,13 +28,12 @@ function SealedJar({ jar }) {
             <Card.Subtitle style={{ color: themeColor }} className="caption">
               {jar.theme}
             </Card.Subtitle>
-            <Card.Meta>
-              <Access user={jar.users} />
-            </Card.Meta>
-            <Card.Meta>
-              <LuClock3 />
-              Sealed until {lockedDate}
-            </Card.Meta>
+            <Access user={jar.users} />
+            <IconLabel
+              label={`Sealed until ${lockedDate}`}
+              icon={<LuClock3 />}
+              className="caption"
+            />
           </div>
           {entriesText && (
             <Card.Meta className="context">{entriesText}</Card.Meta>
@@ -43,9 +47,11 @@ function SealedJar({ jar }) {
 function Access({ user }) {
   if (user.length === 0)
     return (
-      <span className="private">
-        <LuLock /> Private
-      </span>
+      <IconLabel
+        icon={<LuLock />}
+        label="Private"
+        className="private caption"
+      />
     );
 
   const firstThreeUsers = user.slice(0, 3);
@@ -54,17 +60,19 @@ function Access({ user }) {
 
   if (remainingUsers > 0)
     return (
-      <>
-        <LuUsers />
-        Shared with {firstThreeUsers.join(", ")} and {remainingUsers} others
-      </>
+      <IconLabel
+        icon={<LuUsers />}
+        label={`Shared with ${firstThreeUsers.join(", ")} and ${remainingUsers} others`}
+        className="caption"
+      />
     );
 
   return (
-    <>
-      <LuUsers />
-      Shared with {user.join(", ")}
-    </>
+    <IconLabel
+      icon={<LuUsers />}
+      label={`Shared with ${user.join(", ")}`}
+      className="caption"
+    />
   );
 }
 
