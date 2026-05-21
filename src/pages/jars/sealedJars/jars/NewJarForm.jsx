@@ -111,7 +111,7 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
                 dateFormat="yyyy-MM-dd"
                 placeholderText="Select a date"
                 inputMode="none"
-                readonly
+                readOnly={true}
               />
             )}
           />

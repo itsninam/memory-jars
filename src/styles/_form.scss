@@ -117,7 +117,12 @@ form {
 
     .caption.message {
       margin-top: 8px;
-      justify-content: center;
+      text-align: center;
+
+      a {
+        color: var(--button-primary-bg);
+        font-weight: 600;
+      }
     }
   }
 

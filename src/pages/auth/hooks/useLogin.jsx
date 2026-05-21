@@ -6,13 +6,10 @@ export const useLogin = () => {
     mutate: login,
     isPending,
     error,
+    isError,
   } = useMutation({
     mutationFn: loginApi,
-    onError: (error) => {
-      console.log(error.message);
-      alert(error.message);
-    },
   });
 
-  return { login, isPending, error };
+  return { login, isPending, error, isError };
 };

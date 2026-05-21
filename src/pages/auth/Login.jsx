@@ -1,11 +1,13 @@
 import React from "react";
 import AppForm from "../../components/AppForm";
 import Button from "../../components/Button";
+import Error from "../../components/Error";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useLogin } from "./hooks/useLogin";
 
 function Login() {
-  const { login, isPending } = useLogin();
+  const { login, isPending, isError, error } = useLogin();
   const navigate = useNavigate();
 
   const onSubmit = (data, { reset }) => {
@@ -23,6 +25,9 @@ function Login() {
   return (
     <AppForm onHandleSubmit={onSubmit} className="auth-form">
       <AppForm.Header header="Login" />
+
+      {isError ? <Error message={error.message} className="caption" /> : null}
+
       <AppForm.FormField>
         <AppForm.Label label="Enter your email" />
         <AppForm.Input
