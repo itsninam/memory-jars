@@ -11,11 +11,11 @@ import JarEntriesList from "./JarEntriesList";
 import AddEntry from "./AddEntry";
 import Header from "../../../../components/Header";
 
-function JarEntries() {
+function JarEntries({ type }) {
   const { theme, id } = useParams();
 
   const { data, isLoading, isError, error } = useJarEntries(Number(id));
-  const jarIsLocked = compareDate(data?.locked_until);
+  const jarIsLocked = type === "sealed";
   const jarHasEntries = data?.jar_entries.length > 0;
 
   if (isLoading) return <Loading />;
@@ -24,7 +24,10 @@ function JarEntries() {
 
   return (
     <>
-      <Header navigation={<GoBack />} actions={<AddEntry jarId={id} />} />
+      <Header
+        navigation={<GoBack />}
+        actions={jarIsLocked ? <AddEntry jarId={id} /> : null}
+      />
 
       {jarIsLocked ? (
         <LockedJar data={data} jarHasEntries={jarHasEntries} jarId={id} />

@@ -9,7 +9,7 @@ import { getCategory } from "../../../../utils/getCategory";
 import { jarThemes } from "./config/jarThemes";
 import { getPluralSuffix } from "../../../../utils/getPluralSuffix";
 
-function SealedJar({ jar }) {
+function Jar({ jar, sealed }) {
   const themeIcon = getThemeIcon(jar.theme);
   const themeColor = getCategory(jar.theme, jarThemes).color;
   const lockedDate = formatDate(jar.expiry);
@@ -30,7 +30,7 @@ function SealedJar({ jar }) {
             </Card.Subtitle>
             <Access user={jar.users} />
             <IconLabel
-              label={`Sealed until ${lockedDate}`}
+              label={`${sealed ? "Sealed until" : "Unsealed on"} ${lockedDate}`}
               icon={<LuClock3 />}
               className="caption"
             />
@@ -76,4 +76,4 @@ function Access({ user }) {
   );
 }
 
-export default React.memo(SealedJar);
+export default React.memo(Jar);

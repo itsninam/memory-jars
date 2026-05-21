@@ -1,13 +1,15 @@
 import React from "react";
 import AddJar from "./AddJar";
 
-function EmptyJarList() {
+function EmptyJarList({ sealed }) {
   return (
     <div className="empty-jar-container">
       <p className="empty-jar-message">
-        Your jar collection is empty. Start your first memory ✨
+        {sealed
+          ? "Your jar collection is empty. Start your first memory ✨"
+          : "Your jars are still sealed 🔒"}
       </p>
-      <AddJar />
+      {sealed ? <AddJar /> : null}
     </div>
   );
 }

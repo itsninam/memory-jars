@@ -6,5 +6,5 @@ export const getDaysLeft = (date) => {
 
   const daysLeft = diffInMs / (1000 * 60 * 60 * 24);
 
-  return Math.abs(Math.floor(daysLeft));
+  return Math.floor(daysLeft);
 };

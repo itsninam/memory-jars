@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import SealedJar from "./SealedJar";
+import Jar from "./Jar";
 import Loading from "../../../../components/Loading";
 import Error from "../../../../components/Error";
 import AddJar from "./AddJar";
@@ -9,48 +9,46 @@ import Header from "../../../../components/Header";
 import { useJars } from "../../hooks/useJars";
 import { useAuth } from "../../../auth/context/AuthContext";
 import EmptyJarList from "./EmptyJarList";
+import { getDaysLeft } from "../../../../utils/getDaysLeft";
+import { formatJars } from "../../../../utils/formatJars";
 
-function SealedJarsList() {
+function JarsList({ type }) {
   const { user } = useAuth();
   const { data, isLoading, isError, error } = useJars(user.id);
+  const sealed = type === "sealed";
 
-  const formattedJars = useMemo(() => {
+  const jarData = useMemo(() => {
     if (!data) return [];
+    return data;
+  }, [data]);
 
-    return data.map((item) => {
-      const sharedUsers = item.jars.jar_members
-        .filter((member) => member.user_id !== user.id)
-        .map((member) => member.users?.username);
+  const jars = jarData
+    .map((item) => item.jars)
+    .filter((jar) =>
+      sealed
+        ? getDaysLeft(jar.locked_until) > 0
+        : getDaysLeft(jar.locked_until) <= 0,
+    );
 
-      return {
-        id: item.id,
-        title: item.jars.title,
-        users: sharedUsers,
-        theme: item.jars.theme,
-        expiry: item.jars.locked_until,
-        jar_id: item.jars.id,
-        entries: item.jars.jar_entries.length,
-      };
-    });
-  }, [data, user.id]);
+  const formattedJars = formatJars(jars, user.id);
 
   if (isLoading) return <Loading />;
 
   if (isError) return <Error message={error.message} />;
 
-  if (formattedJars.length === 0) return <EmptyJarList />;
+  if (formattedJars.length === 0) return <EmptyJarList sealed={sealed} />;
 
   return (
     <>
-      <Header title="My Jars" actions={<AddJar />} />
+      <Header title="My Jars" actions={sealed ? <AddJar /> : null} />
 
       <CardList className="jar">
         {formattedJars.map((jar) => {
-          return <SealedJar key={jar.id} jar={jar} />;
+          return <Jar key={jar.id} jar={jar} sealed={sealed} />;
         })}
       </CardList>
     </>
   );
 }
 
-export default SealedJarsList;
+export default JarsList;
