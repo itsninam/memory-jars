@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import Button from "../../../../components/Button";
 import AppForm from "../../../../components/AppForm";
 import ShareJar from "./ShareJar";
@@ -6,7 +6,7 @@ import Modal from "../../../../components/Modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Error from "../../../../components/Error";
-import IconContainer from "../../../../components/IconContainer";
+import AccessOption from "../../../../components/AccessOption";
 
 import { LuLock, LuUsers } from "react-icons/lu";
 import { useAddJar } from "../../hooks/useAddJar";
@@ -111,7 +111,6 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
                 dateFormat="yyyy-MM-dd"
                 placeholderText="Select a date"
                 inputMode="none"
-                readOnly={true}
               />
             )}
           />
@@ -123,17 +122,13 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
             <AppForm.FlexContainer>
               <AppForm.Label
                 label={
-                  <>
-                    <IconContainer>
-                      <LuLock />
-                    </IconContainer>
-                    <div>
-                      <p>Private</p>
-                      <span className="caption">
-                        Only you can view this jar
-                      </span>
-                    </div>
-                  </>
+                  <AccessOption
+                    type="outline"
+                    active="active-status"
+                    icon={<LuLock />}
+                    label="Private"
+                    message="Only you can view this jar"
+                  />
                 }
               >
                 <AppForm.Input
@@ -146,17 +141,13 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
 
               <AppForm.Label
                 label={
-                  <>
-                    <IconContainer>
-                      <LuUsers />
-                    </IconContainer>
-                    <div>
-                      <p>Shared</p>
-                      <span className="caption">
-                        Invite others to contribute to this jar
-                      </span>
-                    </div>
-                  </>
+                  <AccessOption
+                    active="active-status"
+                    type="outline"
+                    icon={<LuUsers />}
+                    label="Shared"
+                    message="Invite others to contribute to this jar"
+                  />
                 }
               >
                 <AppForm.Input

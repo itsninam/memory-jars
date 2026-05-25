@@ -55,7 +55,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
 
   .jar-container svg {
     height: 180px;
@@ -72,6 +71,7 @@
     justify-content: space-between;
     width: 80%;
     margin-top: 24px;
+    text-align: center;
 
     .count-container:first-of-type {
       border-right: 1px solid var(--color-border);
@@ -80,5 +80,38 @@
     .count-container {
       flex: 1;
     }
+  }
+
+  .caption.sharing {
+    margin-left: 24px;
+    color: var(--color-text-secondary);
+  }
+
+  .access-container {
+    padding: 16px 0px;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    width: 100%;
+    margin: 24px 0px;
+    display: flex;
+    align-items: center;
+  }
+
+  .access-option {
+    margin: 24px 0px;
+
+    .icon-container {
+      color: var(--color-accent-hover);
+    }
+  }
+
+  .secondary {
+    width: 100%;
+  }
+
+  .chevron-right {
+    margin-left: auto;
+    color: var(--color-text-secondary);
+    cursor: pointer;
   }
 }

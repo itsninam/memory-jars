@@ -29,7 +29,7 @@ form {
     color: var(--color-text-primary);
   }
 
-  label:has(> input[type="radio"]) {
+  .secondary-label:has(> input[type="radio"]) {
     cursor: pointer;
     border: 1px solid var(--color-border);
     padding: 4px 12px;
@@ -42,7 +42,7 @@ form {
     }
   }
 
-  label:has(> input[type="radio"]:checked) {
+  .secondary-label:has(> input[type="radio"]:checked) {
     background-color: var(--color-accent-hover);
     color: var(--color-surface);
   }
@@ -131,27 +131,9 @@ form {
     gap: 12px;
 
     label {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      border-radius: 8px;
-      padding: 8px 12px;
-      flex: 1;
-      width: 100%;
+      padding: 0px;
 
-      &:hover {
-        border: 1px solid var(--color-accent-hover);
-        box-shadow: inset 0 0 0 1px var(--color-accent-hover);
-        color: unset;
-        background-color: unset;
-
-        .icon-container {
-          background-color: var(--color-accent-soft);
-          color: var(--color-accent-hover);
-        }
-      }
-
-      &:has(> input[type="radio"]:checked) {
+      &:has(> input[type="radio"]:checked) .active-status {
         border: 2px solid var(--color-accent-hover);
         background-color: unset;
         color: unset;
@@ -160,22 +142,6 @@ form {
           background-color: var(--color-accent-soft);
           color: var(--color-accent-hover);
         }
-      }
-
-      .icon-container {
-        flex-shrink: 0;
-        background-color: var(--color-surface-soft);
-        color: var(--color-text-muted);
-        border-radius: 50%;
-        padding: 12px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      }
-
-      .caption {
-        color: var(--color-text-secondary);
-        font-weight: 400;
       }
     }
   }

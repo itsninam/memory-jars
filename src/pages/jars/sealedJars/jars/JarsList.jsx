@@ -5,10 +5,10 @@ import Error from "../../../../components/Error";
 import AddJar from "./AddJar";
 import CardList from "../../../../components/card/CardList";
 import Header from "../../../../components/Header";
+import EmptyJar from "./EmptyJar";
 
 import { useJars } from "../../hooks/useJars";
 import { useAuth } from "../../../auth/context/AuthContext";
-import EmptyJarList from "./EmptyJarList";
 import { getDaysLeft } from "../../../../utils/getDaysLeft";
 import { formatJars } from "../../../../utils/formatJars";
 
@@ -36,7 +36,17 @@ function JarsList({ type }) {
 
   if (isError) return <Error message={error.message} />;
 
-  if (formattedJars.length === 0) return <EmptyJarList sealed={sealed} />;
+  if (formattedJars.length === 0)
+    return (
+      <EmptyJar
+        sealed={sealed}
+        label={
+          sealed
+            ? "Your jar collection is empty. Start making memories ✨"
+            : "Your jars are still sealed 🔒"
+        }
+      />
+    );
 
   return (
     <>

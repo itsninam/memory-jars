@@ -37,8 +37,12 @@ export const getJarEntries = async (jarId) => {
       users(username),
       jar_entries(*, 
         users(username)
+      ),
+      jar_members(
+        *,
+        users(username)
       )
-      `,
+    `,
     )
     .eq("id", jarId)
     .single();

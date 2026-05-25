@@ -1,39 +1,46 @@
 import React from "react";
+import Chip from "../../../../components/Chip";
+import IconContainer from "../../../../components/IconContainer";
+import Button from "../../../../components/Button";
 
+import JarIndicators from "./JarIndicators";
+import JarAccess from "../jars/JarAccess";
 import { getDaysLeft } from "../../../../utils/getDaysLeft";
 import { getThemeIcon } from "../../../../utils/getIconTheme";
-import IconContainer from "../../../../components/IconContainer";
 import { getCategory } from "../../../../utils/getCategory";
 import { jarThemes } from "./config/jarThemes";
-import Chip from "../../../../components/Chip";
-import { getPluralSuffix } from "../../../../utils/getPluralSuffix";
+import { useAuth } from "../../../auth/context/AuthContext";
+import { getSharedusers } from "../../../../utils/getSharedUsers";
 
 function LockedJar({ data, jarHasEntries }) {
+  const { user } = useAuth();
   const themeIcon = getThemeIcon(data.theme);
   const themeEmoji = getCategory(data.theme, jarThemes)?.emoji;
   const themeColor = getCategory(data.theme, jarThemes)?.color;
+  const users = getSharedusers(data.jar_members, user.id);
 
   return (
     <div className="sealed-jar">
       <IconContainer>{themeIcon}</IconContainer>
       <Chip label={data.theme} rightIcon={themeEmoji} border />
       <div className="flex-container">
-        <p className="count-container">
-          <span className="count" style={{ color: themeColor }}>
-            {getDaysLeft(data.locked_until)}
-          </span>
-          <span>
-            {getPluralSuffix(getDaysLeft(data.locked_until), "day")} left
-          </span>
-        </p>
-        <p className="count-container">
-          <span className="count" style={{ color: themeColor }}>
-            {!jarHasEntries ? "0" : data.jar_entries.length}
-          </span>
-          {console.log(data.jar_entries.length, "helooo")}
-          <span>{getPluralSuffix(data.jar_entries.length, "note")} inside</span>
-        </p>
+        <JarIndicators
+          themeColor={themeColor}
+          count={getDaysLeft(data.locked_until)}
+          method={getDaysLeft(data.locked_until)}
+          suffix="day"
+          label="left"
+        />
+        <JarIndicators
+          themeColor={themeColor}
+          count={!jarHasEntries ? "0" : data.jar_entries.length}
+          method={data.jar_entries.length}
+          suffix="note"
+          label="inside"
+        />
       </div>
+      <JarAccess user={users} isLockedJar={true} />
+      <Button leftIcon="+" className="secondary" label="Add members" />
     </div>
   );
 }

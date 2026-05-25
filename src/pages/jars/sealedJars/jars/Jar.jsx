@@ -1,9 +1,10 @@
 import React from "react";
 import Card from "../../../../components/card/Card";
 import IconLabel from "../../../../components/IconLabel";
+import JarAccess from "./JarAccess";
 
 import { getThemeIcon } from "../../../../utils/getIconTheme";
-import { LuClock3, LuLock, LuUsers } from "react-icons/lu";
+import { LuClock3 } from "react-icons/lu";
 import { formatDate } from "../../../../utils/formatDate";
 import { getCategory } from "../../../../utils/getCategory";
 import { jarThemes } from "./config/jarThemes";
@@ -28,7 +29,7 @@ function Jar({ jar, sealed }) {
             <Card.Subtitle style={{ color: themeColor }} className="caption">
               {jar.theme}
             </Card.Subtitle>
-            <Access user={jar.users} />
+            <JarAccess user={jar.users} />
             <IconLabel
               label={`${sealed ? "Sealed until" : "Unsealed on"} ${lockedDate}`}
               icon={<LuClock3 />}
@@ -41,38 +42,6 @@ function Jar({ jar, sealed }) {
         </Card.FlexContainer>
       </Card.Navigation>
     </Card>
-  );
-}
-
-function Access({ user }) {
-  if (user.length === 0)
-    return (
-      <IconLabel
-        icon={<LuLock />}
-        label="Private"
-        className="private caption"
-      />
-    );
-
-  const firstThreeUsers = user.slice(0, 3);
-
-  const remainingUsers = user.length - 3;
-
-  if (remainingUsers > 0)
-    return (
-      <IconLabel
-        icon={<LuUsers />}
-        label={`Shared with ${firstThreeUsers.join(", ")} and ${remainingUsers} others`}
-        className="caption"
-      />
-    );
-
-  return (
-    <IconLabel
-      icon={<LuUsers />}
-      label={`Shared with ${user.join(", ")}`}
-      className="caption"
-    />
   );
 }
 

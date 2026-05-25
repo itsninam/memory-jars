@@ -1,7 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useJarEntries } from "../../hooks/useJarEntries";
-import { compareDate } from "../../../../utils/compareDate";
 
 import LockedJar from "../jars/LockedJar";
 import Loading from "../../../../components/Loading";
