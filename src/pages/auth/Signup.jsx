@@ -11,7 +11,11 @@ function Signup() {
 
   const onSubmit = (data, { reset }) => {
     signUp(
-      { email: data.email, password: data.password, username: data.username },
+      {
+        email: data.email.trim().toLowerCase(),
+        password: data.password,
+        username: data.username.trim().toLowerCase(),
+      },
       {
         onSuccess: () => {
           reset();

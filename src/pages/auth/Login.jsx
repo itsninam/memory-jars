@@ -12,7 +12,7 @@ function Login() {
 
   const onSubmit = (data, { reset }) => {
     login(
-      { email: data.email, password: data.password },
+      { email: data.email.trim().toLowerCase(), password: data.password },
       {
         onSuccess: () => {
           reset();

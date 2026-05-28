@@ -31,7 +31,7 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
         lockedUntil: data.date,
         theme: data.theme,
         title: data.title,
-        sharedWith: data.shareWith,
+        sharedWith: data.shareWith.trim().toLowerCase(),
       },
       {
         onSuccess: () => {
