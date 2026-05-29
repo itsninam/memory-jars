@@ -1,6 +1,7 @@
 import React from "react";
 import UserAvatar from "../../../../components/UserAvatar";
 import { getUserColor } from "../../../../utils/getUserColor";
+import { getPluralSuffix } from "../../../../utils/getPluralSuffix";
 
 function UserIcon({ firstThreeUsers, remainingUsers, user, actions }) {
   const getInitial = (name) => {
@@ -17,7 +18,7 @@ function UserIcon({ firstThreeUsers, remainingUsers, user, actions }) {
       ))}
       {remainingUsers ? `+${remainingUsers}` : null}
       <p className="caption sharing">
-        Shared with {user.length} {user.length > 1 ? "people" : "person"}
+        You and {user.length} {getPluralSuffix(user.length, "other")}
       </p>
       {actions ? actions : null}
     </div>

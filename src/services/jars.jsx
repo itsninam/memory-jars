@@ -52,7 +52,7 @@ export const getJarEntries = async (jarId) => {
   return data;
 };
 
-export const addJarEntry = async ({ jarId, entry, userId, mood }) => {
+export const createJarEntry = async ({ jarId, entry, userId, mood }) => {
   const { error } = await supabase
     .from("jar_entries")
     .insert({ jar_id: jarId, entry: entry, user_id: userId, mood: mood });
@@ -60,7 +60,7 @@ export const addJarEntry = async ({ jarId, entry, userId, mood }) => {
   if (error) throw new Error(error.message);
 };
 
-export const addJar = async ({
+export const createJar = async ({
   createdBy,
   lockedUntil,
   theme,
@@ -86,7 +86,7 @@ export const addJar = async ({
 
   if (error) throw new Error(error.message);
 
-  await addJarMembers(data, sharedWithUser);
+  await createJarMembers(data, sharedWithUser);
 };
 
 const getSharedUser = async (user) => {
@@ -101,7 +101,7 @@ const getSharedUser = async (user) => {
   return data;
 };
 
-const addJarMembers = async (data, sharedWithUser) => {
+export const createJarMembers = async (data, sharedWithUser) => {
   const jarMembers = [
     {
       jar_id: data.id,
@@ -117,6 +117,26 @@ const addJarMembers = async (data, sharedWithUser) => {
       role: "editor",
     });
   }
+
+  const { error } = await supabase.from("jar_members").insert(jarMembers);
+
+  if (error) throw new Error(error.message);
+};
+
+export const addJarMembers = async ({ jarId, username }) => {
+  const user = await getSharedUser(username);
+
+  if (!user) {
+    throw new Error("Username does not exist");
+  }
+
+  const jarMembers = [
+    {
+      jar_id: jarId,
+      user_id: user.user_id,
+      role: "editor",
+    },
+  ];
 
   const { error } = await supabase.from("jar_members").insert(jarMembers);
 

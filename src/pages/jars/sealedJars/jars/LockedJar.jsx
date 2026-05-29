@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Chip from "../../../../components/Chip";
 import IconContainer from "../../../../components/IconContainer";
 import Button from "../../../../components/Button";
+import AddJarMembers from "./AddJarMembers";
 
 import JarIndicators from "./JarIndicators";
 import JarAccess from "../jars/JarAccess";
@@ -18,6 +19,7 @@ function LockedJar({ data, jarHasEntries }) {
   const themeEmoji = getCategory(data.theme, jarThemes)?.emoji;
   const themeColor = getCategory(data.theme, jarThemes)?.color;
   const users = getSharedusers(data.jar_members, user.id);
+  const [showAddUser, setShowAddUser] = useState(false);
 
   return (
     <div className="sealed-jar">
@@ -40,7 +42,20 @@ function LockedJar({ data, jarHasEntries }) {
         />
       </div>
       <JarAccess user={users} isLockedJar={true} />
-      <Button leftIcon="+" className="secondary" label="Add members" />
+      <Button
+        leftIcon="+"
+        className="secondary"
+        label="Add members"
+        onClick={() => setShowAddUser(true)}
+      />
+
+      {showAddUser ? (
+        <AddJarMembers
+          setShowAddUser={setShowAddUser}
+          showAddUser={showAddUser}
+          jarData={data}
+        />
+      ) : null}
     </div>
   );
 }

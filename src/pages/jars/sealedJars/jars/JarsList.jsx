@@ -43,7 +43,7 @@ function JarsList({ type }) {
         label={
           sealed
             ? "Your jar collection is empty. Start making memories ✨"
-            : "Your jars are still sealed 🔒"
+            : "No unsealed jars yet"
         }
       />
     );

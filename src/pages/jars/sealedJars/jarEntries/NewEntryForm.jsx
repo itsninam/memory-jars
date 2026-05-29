@@ -3,18 +3,18 @@ import AppForm from "../../../../components/AppForm";
 import Button from "../../../../components/Button";
 import Modal from "../../../../components/Modal";
 
-import { useAddJarEntry } from "../../hooks/useAddJarEntry";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuth } from "../../../auth/context/AuthContext";
 import { jarEntriesMoods } from "./config/jarEntriesMood";
+import { useCreateJarEntry } from "../../hooks/useCreateJarEntry";
 
 function NewEntryForm({ showAddEntry, setShowAddEntry, jarId }) {
-  const { addJarEntry, isPending } = useAddJarEntry();
+  const { createJarEntry, isPending } = useCreateJarEntry();
   const queryClient = useQueryClient();
   const { user } = useAuth();
 
   const onSubmit = (data, { reset }) => {
-    addJarEntry(
+    createJarEntry(
       {
         jarId: jarId,
         entry: data.note,

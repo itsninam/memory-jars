@@ -14,7 +14,9 @@ function AddJar() {
         className="primary"
       />
 
-      <NewJarForm setShowAddJar={setShowAddJar} showAddJar={showAddJar} />
+      {showAddJar ? (
+        <NewJarForm setShowAddJar={setShowAddJar} showAddJar={showAddJar} />
+      ) : null}
     </>
   );
 }

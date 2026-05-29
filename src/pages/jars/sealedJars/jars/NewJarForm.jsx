@@ -9,15 +9,15 @@ import Error from "../../../../components/Error";
 import AccessOption from "../../../../components/AccessOption";
 
 import { LuLock, LuUsers } from "react-icons/lu";
-import { useAddJar } from "../../hooks/useAddJar";
 import { useAuth } from "../../../auth/context/AuthContext";
 import { useQueryClient } from "@tanstack/react-query";
 import { jarThemes } from "./config/jarThemes";
 import { Controller } from "react-hook-form";
 import { addDays } from "date-fns";
+import { useCreateJar } from "../../hooks/useCreateJar";
 
 function NewJarForm({ setShowAddJar, showAddJar }) {
-  const { addJar, isPending, isError, error } = useAddJar();
+  const { createJar, isPending, isError, error } = useCreateJar();
   const { user } = useAuth();
   const queryClient = useQueryClient();
   const formRef = useRef(null);
@@ -25,13 +25,13 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
   const minDate = addDays(new Date(), 5);
 
   const onSubmit = (data, { reset }) => {
-    addJar(
+    createJar(
       {
         createdBy: user.id,
         lockedUntil: data.date,
         theme: data.theme,
         title: data.title,
-        sharedWith: data.shareWith.trim().toLowerCase(),
+        sharedWith: data.shareWith?.trim().toLowerCase(),
       },
       {
         onSuccess: () => {
