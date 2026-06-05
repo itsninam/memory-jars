@@ -38,18 +38,64 @@
   justify-content: center;
   align-items: center;
   z-index: 100;
+
+  .modal-window {
+    flex-grow: 1;
+  }
+
+  .container {
+    background: white;
+    border-radius: 8px;
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .content {
+    padding: 16px;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .users {
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .title {
+    padding: 8px 16px 8px 16px;
+    border-bottom: 1px solid var(--color-border);
+    text-align: center;
+  }
+
+  ul {
+    padding: 16px;
+  }
 }
 
 .error-message {
   color: var(--color-error);
 }
 /* TODO
-- sharing w/ more than one user
-- sharing a private jar?
+- sharing w/ more than one user - DONE
+- sharing a private jar? - DONE
 - delete jar?
 */
 
 .icon-container {
   position: relative;
   width: fit-content;
+}
+
+.people-list {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }

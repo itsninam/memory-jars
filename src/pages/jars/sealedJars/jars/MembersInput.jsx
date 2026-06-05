@@ -2,6 +2,7 @@ import { useFieldArray, useFormContext } from "react-hook-form";
 import { LuX } from "react-icons/lu";
 import AppForm from "../../../../components/AppForm";
 import Button from "../../../../components/Button";
+import Chip from "../../../../components/Chip";
 
 function MembersInput() {
   const {
@@ -10,19 +11,19 @@ function MembersInput() {
     setValue,
     formState: { errors },
   } = useFormContext();
-
-  const { fields, append, remove } = useFieldArray({
-    control,
-    name: "people",
-    rules: {
-      required: "Please enter a name",
-    },
-  });
-
   const errorMessage = errors?.people?.root?.message;
 
   const inputValue = watch("personInput");
   const isPrivateJar = watch("privacy");
+
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name: "people",
+    rules:
+      isPrivateJar !== "private"
+        ? { required: "Please enter a name" }
+        : undefined,
+  });
 
   const handleKeyDown = (e) => {
     if (e.key !== "Enter") return;
@@ -58,15 +59,19 @@ function MembersInput() {
 
       <div className="people-list">
         {fields.map((person, index) => (
-          <div key={person.id} className="person-chip">
-            <span>{person.value}</span>
-            <Button
-              type="button"
-              className="chip"
-              onClick={() => remove(index)}
-              rightIcon={<LuX />}
-            />
-          </div>
+          <Chip
+            key={person.id}
+            label={person.value}
+            variant="border"
+            rightIcon={
+              <Button
+                type="button"
+                className="chip"
+                onClick={() => remove(index)}
+                rightIcon={<LuX />}
+              />
+            }
+          />
         ))}
       </div>
     </AppForm.FormField>

@@ -2,11 +2,11 @@ import { LuChevronRight, LuLock, LuUsers } from "react-icons/lu";
 import IconLabel from "../../../../components/IconLabel";
 import UserIcon from "./UserIcon";
 import AccessOption from "../../../../components/AccessOption";
+import JarMembers from "../jarEntries/JarMembers";
+import { useState } from "react";
 
 function Access({ user, isLockedJar }) {
-  const handleShowMembers = () => {
-    console.log(user);
-  };
+  const [showModal, setShowModal] = useState(false);
 
   if (user.length === 0)
     return (
@@ -54,16 +54,26 @@ function Access({ user, isLockedJar }) {
   return (
     <>
       {isLockedJar ? (
-        <UserIcon
-          firstThreeUsers={firstThreeUsers}
-          user={user}
-          actions={
-            <LuChevronRight
-              onClick={handleShowMembers}
-              className="chevron-right"
+        <>
+          <UserIcon
+            firstThreeUsers={firstThreeUsers}
+            user={user}
+            actions={
+              <LuChevronRight
+                onClick={() => setShowModal(true)}
+                className="chevron-right"
+              />
+            }
+          />
+
+          {showModal ? (
+            <JarMembers
+              user={user}
+              showModal={showModal}
+              setShowModal={setShowModal}
             />
-          }
-        />
+          ) : null}
+        </>
       ) : (
         <IconLabel
           icon={<LuUsers />}

@@ -6,7 +6,7 @@ function Modal({ isOpen, children, onClick }) {
   return (
     <div className="modal-overlay" onClick={onClick}>
       <div
-        className="modal-content"
+        className="modal-window"
         onClick={(event) => event.stopPropagation()}
       >
         {children}

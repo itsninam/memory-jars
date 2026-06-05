@@ -9,5 +9,21 @@
 
   &.border {
     border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 4px 8px;
+    align-items: center;
+    font-weight: normal;
+    font-size: 0.875rem;
+    line-height: 0;
+
+    button {
+      padding: 0px;
+      gap: 0px;
+    }
+
+    svg {
+      display: flex;
+      align-items: center;
+    }
   }
 }
