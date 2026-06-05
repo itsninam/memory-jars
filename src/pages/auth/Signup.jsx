@@ -1,9 +1,9 @@
 import React from "react";
 import AppForm from "../../components/AppForm";
 import Button from "../../components/Button";
+import ErrorMessage from "../../components/ErrorMessage";
 import { Link, useNavigate } from "react-router-dom";
 import { useSignUp } from "./hooks/useSignUp";
-import Error from "../../components/Error";
 
 function Signup() {
   const { signUp, isPending, isError, error } = useSignUp();
@@ -29,7 +29,9 @@ function Signup() {
     <AppForm onHandleSubmit={onSubmit} className="auth-form">
       <AppForm.Header header="Sign up" />
 
-      {isError ? <Error message={error.message} className="caption" /> : null}
+      {isError ? (
+        <ErrorMessage message={error.message} className="caption" />
+      ) : null}
 
       <AppForm.FormField>
         <AppForm.Label label="Enter your email" />

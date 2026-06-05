@@ -72,6 +72,12 @@ form {
     opacity: 1;
   }
 
+  input::placeholder {
+    -webkit-text-fill-color: var(--color-text-secondary);
+    font-size: 0.75rem;
+    opacity: 1;
+  }
+
   footer {
     padding-top: 16px;
     display: flex;

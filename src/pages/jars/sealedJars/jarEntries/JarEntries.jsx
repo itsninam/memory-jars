@@ -4,11 +4,11 @@ import { useJarEntries } from "../../hooks/useJarEntries";
 
 import LockedJar from "../jars/LockedJar";
 import Loading from "../../../../components/Loading";
-import Error from "../../../../components/Error";
 import GoBack from "../../../../components/GoBack";
 import JarEntriesList from "./JarEntriesList";
 import AddEntry from "./AddEntry";
 import Header from "../../../../components/Header";
+import ErrorMessage from "../../../../components/ErrorMessage";
 
 function JarEntries({ type }) {
   const { theme, id } = useParams();
@@ -19,7 +19,7 @@ function JarEntries({ type }) {
 
   if (isLoading) return <Loading />;
 
-  if (isError) return <Error message={error.message} />;
+  if (isError) return <ErrorMessage message={error.message} />;
 
   return (
     <>

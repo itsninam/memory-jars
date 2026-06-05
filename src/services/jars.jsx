@@ -89,14 +89,19 @@ export const createJar = async ({
   await createJarMembers(data, sharedWithUser);
 };
 
-const getSharedUser = async (user) => {
-  const { data, error } = await supabase
+const getSharedUser = async (users) => {
+  const { data } = await supabase
     .from("users")
-    .select("*")
-    .eq("username", user)
-    .maybeSingle();
+    .select("user_id, username")
+    .in("username", users);
 
-  if (error) throw new Error(error.message);
+  const foundUsernames = data.map((u) => u.username);
+
+  const missing = users.filter((name) => !foundUsernames.includes(name));
+
+  if (missing.length) {
+    throw new Error(`${missing.join(", ")} does not exist`);
+  }
 
   return data;
 };
@@ -111,11 +116,13 @@ export const createJarMembers = async (data, sharedWithUser) => {
   ];
 
   if (sharedWithUser !== null) {
-    jarMembers.push({
+    const newMembers = sharedWithUser.map((user) => ({
       jar_id: data.id,
-      user_id: sharedWithUser.user_id,
+      user_id: user.user_id,
       role: "editor",
-    });
+    }));
+
+    jarMembers.push(...newMembers);
   }
 
   const { error } = await supabase.from("jar_members").insert(jarMembers);
@@ -123,22 +130,19 @@ export const createJarMembers = async (data, sharedWithUser) => {
   if (error) throw new Error(error.message);
 };
 
-export const addJarMembers = async ({ jarId, username }) => {
-  const user = await getSharedUser(username);
+export const addJarMembers = async ({ jarId, usernames }) => {
+  const users = await getSharedUser(usernames);
+  const inserts = users.map((user) => ({
+    jar_id: jarId,
+    user_id: user.user_id,
+    role: "editor",
+  }));
 
-  if (!user) {
-    throw new Error("Username does not exist");
+  const { error } = await supabase.from("jar_members").insert(inserts);
+
+  if (error?.code === "23505") {
+    throw new Error("One or more users are already members of this jar");
   }
-
-  const jarMembers = [
-    {
-      jar_id: jarId,
-      user_id: user.user_id,
-      role: "editor",
-    },
-  ];
-
-  const { error } = await supabase.from("jar_members").insert(jarMembers);
 
   if (error) throw new Error(error.message);
 };

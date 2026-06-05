@@ -1,12 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import Button from "../../../../components/Button";
 import AppForm from "../../../../components/AppForm";
-import ShareJar from "./ShareJar";
 import Modal from "../../../../components/Modal";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import Error from "../../../../components/Error";
 import AccessOption from "../../../../components/AccessOption";
+import ErrorMessage from "../../../../components/ErrorMessage";
 
 import { LuLock, LuUsers } from "react-icons/lu";
 import { useAuth } from "../../../auth/context/AuthContext";
@@ -15,6 +14,7 @@ import { jarThemes } from "./config/jarThemes";
 import { Controller } from "react-hook-form";
 import { addDays } from "date-fns";
 import { useCreateJar } from "../../hooks/useCreateJar";
+import MembersInput from "./MembersInput";
 
 function NewJarForm({ setShowAddJar, showAddJar }) {
   const { createJar, isPending, isError, error } = useCreateJar();
@@ -31,7 +31,7 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
         lockedUntil: data.date,
         theme: data.theme,
         title: data.title,
-        sharedWith: data.shareWith?.trim().toLowerCase(),
+        sharedWith: data.people.map((p) => p.value.trim().toLowerCase()),
       },
       {
         onSuccess: () => {
@@ -58,7 +58,9 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
       >
         <AppForm.Header header="Create new jar" />
 
-        {isError ? <Error message={error.message} className="caption" /> : null}
+        {isError ? (
+          <ErrorMessage message={error.message} className="caption" />
+        ) : null}
 
         <AppForm.FormField>
           <AppForm.Label label="Title">
@@ -161,7 +163,7 @@ function NewJarForm({ setShowAddJar, showAddJar }) {
           </AppForm.FormField>
         </AppForm.Label>
 
-        <ShareJar />
+        <MembersInput />
 
         <AppForm.Footer>
           <Button

@@ -1,7 +1,7 @@
 import React from "react";
 
-function Error({ message, className }) {
+function ErrorMessage({ message, className }) {
   return <p className={`error-message ${className ?? ""}`}>{message}</p>;
 }
 
-export default Error;
+export default ErrorMessage;

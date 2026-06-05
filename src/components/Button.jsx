@@ -1,6 +1,14 @@
 import React from "react";
 
-function Button({ type, label, disabled, onClick, className, leftIcon }) {
+function Button({
+  type,
+  label,
+  disabled,
+  onClick,
+  className,
+  leftIcon,
+  rightIcon,
+}) {
   return (
     <button
       type={type}
@@ -10,6 +18,7 @@ function Button({ type, label, disabled, onClick, className, leftIcon }) {
     >
       {leftIcon && <span>{leftIcon}</span>}
       <span>{label}</span>
+      {rightIcon && <span>{rightIcon}</span>}
     </button>
   );
 }

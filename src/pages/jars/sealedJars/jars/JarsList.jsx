@@ -1,11 +1,11 @@
 import React, { useMemo } from "react";
 import Jar from "./Jar";
 import Loading from "../../../../components/Loading";
-import Error from "../../../../components/Error";
 import AddJar from "./AddJar";
 import CardList from "../../../../components/card/CardList";
 import Header from "../../../../components/Header";
 import EmptyJar from "./EmptyJar";
+import ErrorMessage from "../../../../components/ErrorMessage";
 
 import { useJars } from "../../hooks/useJars";
 import { useAuth } from "../../../auth/context/AuthContext";
@@ -34,7 +34,7 @@ function JarsList({ type }) {
 
   if (isLoading) return <Loading />;
 
-  if (isError) return <Error message={error.message} />;
+  if (isError) return <ErrorMessage message={error.message} />;
 
   if (formattedJars.length === 0)
     return (

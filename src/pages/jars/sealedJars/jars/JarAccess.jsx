@@ -4,6 +4,10 @@ import UserIcon from "./UserIcon";
 import AccessOption from "../../../../components/AccessOption";
 
 function Access({ user, isLockedJar }) {
+  const handleShowMembers = () => {
+    console.log(user);
+  };
+
   if (user.length === 0)
     return (
       <>
@@ -53,7 +57,12 @@ function Access({ user, isLockedJar }) {
         <UserIcon
           firstThreeUsers={firstThreeUsers}
           user={user}
-          actions={<LuChevronRight className="chevron-right" />}
+          actions={
+            <LuChevronRight
+              onClick={handleShowMembers}
+              className="chevron-right"
+            />
+          }
         />
       ) : (
         <IconLabel

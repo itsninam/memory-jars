@@ -21,7 +21,16 @@ function AppForm({ children, onHandleSubmit, defaultValues, className, ref }) {
   );
 }
 
-function Input({ type, name, errorMessage, min, id, value }) {
+function Input({
+  type,
+  name,
+  errorMessage,
+  min,
+  id,
+  value,
+  onKeyDown,
+  placeholder,
+}) {
   const { register } = useFormContext();
 
   return (
@@ -31,6 +40,8 @@ function Input({ type, name, errorMessage, min, id, value }) {
       id={id}
       {...(value !== undefined ? { value } : {})}
       {...register(name, { required: errorMessage })}
+      onKeyDown={onKeyDown}
+      placeholder={placeholder}
     />
   );
 }
@@ -56,7 +67,9 @@ function Error({ name }) {
 
   if (!errors?.[name]) return null;
 
-  return <p className="error">{errors[name].message}</p>;
+  return (
+    <p className="error">{errors[name].message || errors[name].root.message}</p>
+  );
 }
 
 function Label({ label, children, className }) {
