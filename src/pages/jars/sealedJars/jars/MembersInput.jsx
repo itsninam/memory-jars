@@ -19,10 +19,9 @@ function MembersInput() {
   const { fields, append, remove } = useFieldArray({
     control,
     name: "people",
-    rules:
-      isPrivateJar !== "private"
-        ? { required: "Please enter a name" }
-        : undefined,
+    rules: {
+      required: isPrivateJar !== "private" ? "Please enter a name" : false,
+    },
   });
 
   const handleKeyDown = (e) => {
