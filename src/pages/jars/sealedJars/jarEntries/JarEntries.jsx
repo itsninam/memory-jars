@@ -1,5 +1,5 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useJarEntries } from "../../hooks/useJarEntries";
 
 import LockedJar from "../jars/LockedJar";
@@ -10,12 +10,19 @@ import AddEntry from "./AddEntry";
 import Header from "../../../../components/Header";
 import ErrorMessage from "../../../../components/ErrorMessage";
 
-function JarEntries({ type }) {
+function JarEntries() {
   const { theme, id } = useParams();
 
   const { data, isLoading, isError, error } = useJarEntries(Number(id));
-  const jarIsLocked = type === "sealed";
+  const jarIsLocked = !data || new Date(data.locked_until) > new Date();
   const jarHasEntries = data?.jar_entries.length > 0;
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!jarIsLocked) {
+      navigate(`/home/unsealed/ideas/${id}`, { replace: true });
+    }
+  }, [jarIsLocked, id, navigate]);
 
   if (isLoading) return <Loading />;
 

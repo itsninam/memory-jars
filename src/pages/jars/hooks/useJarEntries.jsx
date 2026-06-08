@@ -6,6 +6,7 @@ export const useJarEntries = (jarId) => {
     queryKey: ["jar_entries", jarId],
     queryFn: () => getJarEntries(jarId),
     enabled: !!jarId,
+    refetchInterval: 5000, 
   });
 
   return { data, isLoading, isError, error };

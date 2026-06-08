@@ -24,6 +24,8 @@ function LockedJar({ data, jarHasEntries }) {
   return (
     <div className="sealed-jar">
       <IconContainer>{themeIcon}</IconContainer>
+      <h2>{data.title}</h2>
+
       <Chip label={data.theme} rightIcon={themeEmoji} />
       <div className="flex-container">
         <JarIndicators
